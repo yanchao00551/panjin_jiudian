@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.OrderGoodsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.OrderGoodsEntity" id="orderGoodsMap">
+        <result property="orderGoodsId" column="order_goods_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="skuId" column="sku_id"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="price" column="price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="num" column="num"/>
+        <result property="adjustMoney" column="adjust_money"/>
+        <result property="goodsMoney" column="goods_money"/>
+        <result property="goodsPicture" column="goods_picture"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="pointExchangeType" column="point_exchange_type"/>
+        <result property="goodsType" column="goods_type"/>
+        <result property="promotionId" column="promotion_id"/>
+        <result property="promotionTypeId" column="promotion_type_id"/>
+        <result property="orderType" column="order_type"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="givePoint" column="give_point"/>
+        <result property="shippingStatus" column="shipping_status"/>
+        <result property="refundType" column="refund_type"/>
+        <result property="refundRequireMoney" column="refund_require_money"/>
+        <result property="refundReason" column="refund_reason"/>
+        <result property="refundShippingCode" column="refund_shipping_code"/>
+        <result property="refundShippingCompany" column="refund_shipping_company"/>
+        <result property="refundRealMoney" column="refund_real_money"/>
+        <result property="refundStatus" column="refund_status"/>
+        <result property="memo" column="memo"/>
+        <result property="isEvaluate" column="is_evaluate"/>
+        <result property="refundTime" column="refund_time"/>
+        <result property="refundBalanceMoney" column="refund_balance_money"/>
+        <result property="tmpExpressCompany" column="tmp_express_company"/>
+        <result property="tmpExpressCompanyId" column="tmp_express_company_id"/>
+        <result property="tmpExpressNo" column="tmp_express_no"/>
+        <result property="giftFlag" column="gift_flag"/>
+        <result property="liveinDate" column="livein_date"/>
+        <result property="leaveoutDate" column="leaveout_date"/>
+    </resultMap>
+    
+    <select id="queryOrderGoodsByOrderNo" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.order.entity.OrderGoodsEntity">
+    	SELECT
+			og.order_goods_id,
+			og.order_id,
+			og.goods_id,
+			og.goods_name,
+			og.sku_id,
+			og.sku_name,
+			og.price,
+			og.cost_price,
+			og.num,
+			og.adjust_money,
+			og.goods_money,
+			og.goods_picture,
+			og.shop_id,
+			og.buyer_id,
+			og.point_exchange_type,
+			og.goods_type,
+			og.promotion_id,
+			og.promotion_type_id,
+			og.order_type,
+			og.order_status,
+			og.give_point,
+			og.shipping_status,
+			og.refund_type,
+			og.refund_require_money,
+			og.refund_reason,
+			og.refund_shipping_code,
+			og.refund_shipping_company,
+			og.refund_real_money,
+			og.refund_status,
+			og.memo,
+			og.is_evaluate,
+			og.refund_time,
+			og.refund_balance_money,
+			og.tmp_express_company,
+			og.tmp_express_company_id,
+			og.tmp_express_no,
+			og.gift_flag,
+			og.livein_date,
+			og.leaveout_date
+		FROM
+			ns_order_goods og
+		LEFT JOIN ns_order o ON og.order_id = o.order_id
+		WHERE
+			1 = 1
+		<if test="orderNo != null and orderNo !=''">
+			AND o.order_no = #{orderNo}
+		</if>
+    </select>
+    
+    <select id="queryOrderGoodsInfo" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.order.entity.OrderGoodsEntity">
+    	SELECT
+			og.order_goods_id,
+			og.order_id,
+			og.goods_id,
+			og.goods_name,
+			og.sku_id,
+			og.sku_name,
+			og.price,
+			og.cost_price,
+			og.num,
+			og.adjust_money,
+			og.goods_money,
+			og.goods_picture,
+			og.shop_id,
+			og.buyer_id,
+			og.point_exchange_type,
+			og.goods_type,
+			og.promotion_id,
+			og.promotion_type_id,
+			og.order_type,
+			og.order_status,
+			og.give_point,
+			og.shipping_status,
+			og.refund_type,
+			og.refund_require_money,
+			og.refund_reason,
+			og.refund_shipping_code,
+			og.refund_shipping_company,
+			og.refund_real_money,
+			og.refund_status,
+			og.memo,
+			og.is_evaluate,
+			og.refund_time,
+			og.refund_balance_money,
+			og.tmp_express_company,
+			og.tmp_express_company_id,
+			og.tmp_express_no,
+			og.gift_flag,
+			og.livein_date,
+			og.leaveout_date,
+			g.max_use_point,
+			g.state
+		FROM
+			ns_order_goods og
+		LEFT JOIN ns_goods g ON og.goods_id = g.goods_id
+		WHERE
+			1 = 1
+		<if test="orderId != null and orderId !=''">
+			AND og.order_id = #{orderId}
+		</if>
+    </select>
+
+
+</mapper>

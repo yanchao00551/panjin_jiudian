@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.weixin.dao.SysWeixinUserMsgReplayDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.weixin.entity.SysWeixinUserMsgReplayEntity" id="sysWeixinUserMsgReplayMap">
+        <result property="replayId" column="replay_id"/>
+        <result property="msgId" column="msg_id"/>
+        <result property="replayUid" column="replay_uid"/>
+        <result property="replayType" column="replay_type"/>
+        <result property="content" column="content"/>
+        <result property="replayTime" column="replay_time"/>
+        <result property="nickname" column="nickname"/>
+    </resultMap>
+
+
+</mapper>

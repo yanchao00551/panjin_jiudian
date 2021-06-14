@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.member.dao.MemberAccountRecordsDao">
+
+	 <resultMap type="com.jiudian.modules.member.entity.MemberAccountRecordsEntity" id="memberAccountRecordsMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="accountType" column="account_type"/>
+        <result property="sign" column="sign"/>
+        <result property="number" column="number"/>
+        <result property="fromType" column="from_type"/>
+        <result property="dataId" column="data_id"/>
+        <result property="text" column="text"/>
+        <result property="createTime" column="create_time"/>
+        <result property="fromUid" column="from_uid"/>
+        <result property="isFreeze" column="is_freeze"/>
+        <result property="groupId" column="group_id"/>
+    </resultMap>
+
+	<!-- 会员详情记录查询 固定死条件 冻结金额流水不展示-->
+	<select id="queryDetailByUserList" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.member.entity.MemberAccountRecordsEntity">
+		SELECT nmar.id, nmar.uid, nmar.shop_id, nmar.account_type, nmar.sign,
+		nmar.number, nmar.from_type, nmar.data_id, nmar.text,
+		nmar.create_time, nmar.from_uid, su.nick_name, su.username, su.user_tel,
+		su.user_email, su.user_headimg,su.mobile
+		FROM ns_member_account_records as nmar
+		LEFT JOIN tb_user as su ON nmar.uid = su.user_id
+		WHERE 1=1
+		<if test="memberId != null and memberId !=''">
+			AND nmar.uid = #{memberId}
+		</if>
+		<if test="username != null and username !=''">
+			AND su.username LIKE '%${username}%'
+		</if>
+		<if test="searchText != null and searchText !=''">
+			AND nmar.text LIKE '%${searchText}%'
+		</if>
+		<if test="mobile != null and mobile !=''">
+			AND su.mobile LIKE '%${mobile}%'
+		</if>
+		
+		<if test="startDatetime !=null and startDatetime !=''">
+		  <if test="endDatetime !=null and endDatetime !=''">
+			AND nmar.create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		  </if>
+		</if>
+		<if test="accountType !=null and accountType !=''">
+			AND nmar.account_type =#{accountType}
+		</if>
+		<if test="fromType !=null and fromType !='' and fromType != 0">
+			AND nmar.from_type = #{fromType}
+		</if>
+		AND nmar.is_freeze = 0
+		ORDER BY nmar.create_time DESC
+	</select>
+	
+	<select id="queryUse" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+		SELECT sum(nmar.number)
+		FROM ns_member_account_records as nmar
+		LEFT JOIN tb_user as su ON nmar.uid = su.user_id
+		WHERE 1=1
+		AND nmar.number &lt; 0
+		<if test="memberId != null and memberId !=''">
+			AND nmar.uid = #{memberId}
+		</if>
+		<if test="username != null and username !=''">
+			AND su.username LIKE '%${username}%'
+		</if>
+		<if test="searchText != null and searchText !=''">
+			AND nmar.text LIKE '%${searchText}%'
+		</if>
+		<if test="mobile != null and mobile !=''">
+			AND su.mobile LIKE '%${mobile}%'
+		</if>
+		
+		<if test="startDatetime !=null and startDatetime !=''">
+		  <if test="endDatetime !=null and endDatetime !=''">
+			AND nmar.create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		  </if>
+		</if>
+		<if test="accountType !=null and accountType !=''">
+			AND nmar.account_type =#{accountType}
+		</if>
+		<if test="fromType !=null and fromType !='' and fromType != 0">
+			AND nmar.from_type = #{fromType}
+		</if>
+		AND nmar.is_freeze = 0
+		ORDER BY nmar.create_time DESC
+	</select>
+	
+	<select id="queryGet" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+		SELECT sum(nmar.number)
+		FROM ns_member_account_records as nmar
+		LEFT JOIN tb_user as su ON nmar.uid = su.user_id
+		WHERE 1=1
+		AND nmar.number &gt; 0
+		<if test="memberId != null and memberId !=''">
+			AND nmar.uid = #{memberId}
+		</if>
+		<if test="username != null and username !=''">
+			AND su.username LIKE '%${username}%'
+		</if>
+		<if test="searchText != null and searchText !=''">
+			AND nmar.text LIKE '%${searchText}%'
+		</if>
+		<if test="mobile != null and mobile !=''">
+			AND su.mobile LIKE '%${mobile}%'
+		</if>
+		
+		<if test="startDatetime !=null and startDatetime !=''">
+		  <if test="endDatetime !=null and endDatetime !=''">
+			AND nmar.create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		  </if>
+		</if>
+		<if test="accountType !=null and accountType !=''">
+			AND nmar.account_type =#{accountType}
+		</if>
+		<if test="fromType !=null and fromType !='' and fromType != 0">
+			AND nmar.from_type = #{fromType}
+		</if>
+		AND nmar.is_freeze = 0
+		ORDER BY nmar.create_time DESC
+	</select>
+	
+	<select id="queryTodayCount" parameterType="java.util.Map"
+		resultType="integer">
+		SELECT
+			COUNT(id)
+		FROM
+			ns_member_account_records
+		WHERE
+			DATEDIFF(create_time, NOW()) = 0
+			AND from_type = 13 
+		<if test="uid !=null and uid !=''">
+			AND uid = #{uid} 
+		</if>
+	</select>
+	
+	<select id="queryTotalPoint" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.member.entity.MemberAccountRecordsEntity">
+		SELECT
+			mar.id,
+			mar.uid,
+			mar.shop_id,
+			mar.account_type,
+			mar.sign,
+			mar.from_type,
+			mar.data_id,
+			mar.text,
+			mar.create_time,
+			mar.from_uid,
+			mar.is_freeze,
+			mar.group_id,
+			SUM(mar.number) AS totalpoint,
+			mp.`status`
+		FROM
+			ns_member_account_records mar
+		LEFT JOIN ns_member_partner mp ON mar.uid = mp.uid
+		WHERE
+			number > 0 
+			AND mp.`status` = 1
+			<if test="groupId !=null and groupId !=''">
+				AND mar.group_id = #{groupId} 
+			</if>
+		GROUP BY
+			uid
+		ORDER BY
+			totalpoint DESC
+	</select>
+
+</mapper>

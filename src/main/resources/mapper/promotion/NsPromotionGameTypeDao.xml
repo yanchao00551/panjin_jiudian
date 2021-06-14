@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.promotion.dao.NsPromotionGameTypeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.promotion.entity.NsPromotionGameTypeEntity" id="nsPromotionGameTypeMap">
+        <result property="gameType" column="game_type"/>
+        <result property="typeName" column="type_name"/>
+        <result property="typeImage" column="type_image"/>
+        <result property="typeIco" column="type_ico"/>
+        <result property="typeDes" column="type_des"/>
+        <result property="sort" column="sort"/>
+        <result property="isComplete" column="is_complete"/>
+        <result property="gameText" column="game_text"/>
+    </resultMap>
+
+
+</mapper>

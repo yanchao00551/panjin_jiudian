@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.invoice.dao.UserInvoiceDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.invoice.entity.UserInvoiceEntity" id="userInvoiceMap">
+        <result property="invoiceId" column="invoice_id"/>
+        <result property="isCompany" column="is_company"/>
+        <result property="invoiceType" column="invoice_type"/>
+        <result property="companyName" column="company_name"/>
+        <result property="taxpayerCode" column="taxpayer_code"/>
+        <result property="socialCreditCode" column="social_credit_code"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="telNum" column="tel_num"/>
+        <result property="bank" column="bank"/>
+        <result property="bankAccount" column="bank_account"/>
+        <result property="uid" column="uid"/>
+    </resultMap>
+
+
+</mapper>

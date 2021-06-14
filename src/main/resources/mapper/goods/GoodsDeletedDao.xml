@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.goods.dao.GoodsDeletedDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.goods.entity.GoodsDeletedEntity" id="goodsDeletedMap">
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryId1" column="category_id_1"/>
+        <result property="categoryId2" column="category_id_2"/>
+        <result property="categoryId3" column="category_id_3"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="groupIdArray" column="group_id_array"/>
+        <result property="promotionType" column="promotion_type"/>
+        <result property="promoteId" column="promote_id"/>
+        <result property="goodsType" column="goods_type"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="price" column="price"/>
+        <result property="promotionPrice" column="promotion_price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="pointExchangeType" column="point_exchange_type"/>
+        <result property="pointExchange" column="point_exchange"/>
+        <result property="givePoint" column="give_point"/>
+        <result property="isMemberDiscount" column="is_member_discount"/>
+        <result property="shippingFee" column="shipping_fee"/>
+        <result property="shippingFeeId" column="shipping_fee_id"/>
+        <result property="stock" column="stock"/>
+        <result property="maxBuy" column="max_buy"/>
+        <result property="clicks" column="clicks"/>
+        <result property="minStockAlarm" column="min_stock_alarm"/>
+        <result property="sales" column="sales"/>
+        <result property="collects" column="collects"/>
+        <result property="star" column="star"/>
+        <result property="evaluates" column="evaluates"/>
+        <result property="shares" column="shares"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="picture" column="picture"/>
+        <result property="keywords" column="keywords"/>
+        <result property="introduction" column="introduction"/>
+        <result property="description" column="description"/>
+        <result property="qrcode" column="QRcode"/>
+        <result property="code" column="code"/>
+        <result property="isStockVisible" column="is_stock_visible"/>
+        <result property="isHot" column="is_hot"/>
+        <result property="isRecommend" column="is_recommend"/>
+        <result property="isNew" column="is_new"/>
+        <result property="isPreSale" column="is_pre_sale"/>
+        <result property="isBill" column="is_bill"/>
+        <result property="state" column="state"/>
+        <result property="sort" column="sort"/>
+        <result property="imgIdArray" column="img_id_array"/>
+        <result property="skuImgArray" column="sku_img_array"/>
+        <result property="matchPoint" column="match_point"/>
+        <result property="matchRatio" column="match_ratio"/>
+        <result property="realSales" column="real_sales"/>
+        <result property="goodsAttributeId" column="goods_attribute_id"/>
+        <result property="goodsSpecFormat" column="goods_spec_format"/>
+        <result property="goodsWeight" column="goods_weight"/>
+        <result property="goodsVolume" column="goods_volume"/>
+        <result property="shippingFeeType" column="shipping_fee_type"/>
+        <result property="extendCategoryId" column="extend_category_id"/>
+        <result property="extendCategoryId1" column="extend_category_id_1"/>
+        <result property="extendCategoryId2" column="extend_category_id_2"/>
+        <result property="extendCategoryId3" column="extend_category_id_3"/>
+        <result property="supplierId" column="supplier_id"/>
+        <result property="saleDate" column="sale_date"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="minBuy" column="min_buy"/>
+        <result property="virtualGoodsTypeId" column="virtual_goods_type_id"/>
+        <result property="productionDate" column="production_date"/>
+        <result property="shelfLife" column="shelf_life"/>
+        <result property="goodsVideoAddress" column="goods_video_address"/>
+        <result property="pcCustomTemplate" column="pc_custom_template"/>
+        <result property="wapCustomTemplate" column="wap_custom_template"/>
+        <result property="maxUsePoint" column="max_use_point"/>
+        <result property="isOpenPresell" column="is_open_presell"/>
+        <result property="presellTime" column="presell_time"/>
+        <result property="presellDay" column="presell_day"/>
+        <result property="presellDeliveryType" column="presell_delivery_type"/>
+        <result property="presellPrice" column="presell_price"/>
+        <result property="goodsUnit" column="goods_unit"/>
+    </resultMap>
+
+
+</mapper>

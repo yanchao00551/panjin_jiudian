@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.weixin.dao.SysWeixinMediaItemDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.weixin.entity.SysWeixinMediaItemEntity" id="sysWeixinMediaItemMap">
+        <result property="id" column="id"/>
+        <result property="mediaId" column="media_id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="cover" column="cover"/>
+        <result property="showCoverPic" column="show_cover_pic"/>
+        <result property="summary" column="summary"/>
+        <result property="content" column="content"/>
+        <result property="contentSourceUrl" column="content_source_url"/>
+        <result property="sort" column="sort"/>
+        <result property="hits" column="hits"/>
+    </resultMap>
+
+
+</mapper>

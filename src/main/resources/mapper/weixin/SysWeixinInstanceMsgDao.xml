@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.weixin.dao.SysWeixinInstanceMsgDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.weixin.entity.SysWeixinInstanceMsgEntity" id="sysWeixinInstanceMsgMap">
+        <result property="id" column="id"/>
+        <result property="instanceId" column="instance_id"/>
+        <result property="templateNo" column="template_no"/>
+        <result property="templateId" column="template_id"/>
+        <result property="title" column="title"/>
+        <result property="isEnable" column="is_enable"/>
+        <result property="headtext" column="headtext"/>
+        <result property="bottomtext" column="bottomtext"/>
+    </resultMap>
+
+
+</mapper>

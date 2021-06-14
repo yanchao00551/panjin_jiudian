@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.goods.dao.GoodsSpecDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.goods.entity.GoodsSpecEntity" id="goodsSpecMap">
+        <result property="specId" column="spec_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="specName" column="spec_name"/>
+        <result property="isVisible" column="is_visible"/>
+        <result property="sort" column="sort"/>
+        <result property="showType" column="show_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="isScreen" column="is_screen"/>
+        <result property="specDes" column="spec_des"/>
+    </resultMap>
+
+
+</mapper>

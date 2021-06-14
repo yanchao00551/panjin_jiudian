@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.goods.dao.GoodsBrandDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.goods.entity.GoodsBrandEntity" id="goodsBrandMap">
+        <result property="brandId" column="brand_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="brandName" column="brand_name"/>
+        <result property="brandInitial" column="brand_initial"/>
+        <result property="brandPic" column="brand_pic"/>
+        <result property="brandRecommend" column="brand_recommend"/>
+        <result property="sort" column="sort"/>
+        <result property="brandCategoryName" column="brand_category_name"/>
+        <result property="categoryIdArray" column="category_id_array"/>
+        <result property="brandAds" column="brand_ads"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="categoryId1" column="category_id_1"/>
+        <result property="categoryId2" column="category_id_2"/>
+        <result property="categoryId3" column="category_id_3"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.OrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.OrderEntity" id="orderMap">
+        <result property="orderId" column="order_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="outTradeNo" column="out_trade_no"/>
+        <result property="orderType" column="order_type"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="shippingType" column="shipping_type"/>
+        <result property="orderFrom" column="order_from"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="buyerIp" column="buyer_ip"/>
+        <result property="buyerMessage" column="buyer_message"/>
+        <result property="buyerInvoice" column="buyer_invoice"/>
+        <result property="receiverMobile" column="receiver_mobile"/>
+        <result property="receiverProvince" column="receiver_province"/>
+        <result property="receiverCity" column="receiver_city"/>
+        <result property="receiverDistrict" column="receiver_district"/>
+        <result property="receiverAddress" column="receiver_address"/>
+        <result property="receiverZip" column="receiver_zip"/>
+        <result property="receiverName" column="receiver_name"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="sellerStar" column="seller_star"/>
+        <result property="sellerMemo" column="seller_memo"/>
+        <result property="consignTimeAdjust" column="consign_time_adjust"/>
+        <result property="goodsMoney" column="goods_money"/>
+        <result property="orderMoney" column="order_money"/>
+        <result property="point" column="point"/>
+        <result property="pointMoney" column="point_money"/>
+        <result property="couponMoney" column="coupon_money"/>
+        <result property="couponId" column="coupon_id"/>
+        <result property="userMoney" column="user_money"/>
+        <result property="userPlatformMoney" column="user_platform_money"/>
+        <result property="promotionMoney" column="promotion_money"/>
+        <result property="shippingMoney" column="shipping_money"/>
+        <result property="payMoney" column="pay_money"/>
+        <result property="refundMoney" column="refund_money"/>
+        <result property="coinMoney" column="coin_money"/>
+        <result property="givePoint" column="give_point"/>
+        <result property="giveCoin" column="give_coin"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="shippingStatus" column="shipping_status"/>
+        <result property="reviewStatus" column="review_status"/>
+        <result property="feedbackStatus" column="feedback_status"/>
+        <result property="isEvaluate" column="is_evaluate"/>
+        <result property="taxMoney" column="tax_money"/>
+        <result property="shippingCompanyId" column="shipping_company_id"/>
+        <result property="givePointType" column="give_point_type"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="shippingTime" column="shipping_time"/>
+        <result property="signTime" column="sign_time"/>
+        <result property="consignTime" column="consign_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="finishTime" column="finish_time"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="operatorType" column="operator_type"/>
+        <result property="operatorId" column="operator_id"/>
+        <result property="refundBalanceMoney" column="refund_balance_money"/>
+        <result property="fixedTelephone" column="fixed_telephone"/>
+    </resultMap>
+    
+    
+    <select id="queryByOrderList" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.order.entity.OrderEntity">
+	SELECT
+		order_id,
+		order_no,
+		out_trade_no,
+		order_type,
+		payment_type,
+		shipping_type,
+		order_from,
+		buyer_id,
+		user_name,
+		buyer_ip,
+		buyer_message,
+		buyer_invoice,
+		receiver_mobile,
+		receiver_province,
+		receiver_city,
+		receiver_district,
+		receiver_address,
+		receiver_zip,
+		receiver_name,
+		shop_id,
+		shop_name,
+		seller_star,
+		seller_memo,
+		consign_time_adjust,
+		goods_money,
+		order_money,
+		point,
+		point_money,
+		coupon_money,
+		coupon_id,
+		user_money,
+		user_platform_money,
+		promotion_money,
+		shipping_money,
+		pay_money,
+		refund_money,
+		coin_money,
+		give_point,
+		give_coin,
+		order_status,
+		pay_status,
+		shipping_status,
+		review_status,
+		feedback_status,
+		is_evaluate,
+		tax_money,
+		shipping_company_id,
+		give_point_type,
+		pay_time,
+		shipping_time,
+		sign_time,
+		consign_time,
+		create_time,
+		finish_time,
+		is_deleted,
+		operator_type,
+		operator_id,
+		refund_balance_money,
+		fixed_telephone,
+		key_id,
+		key_comment_flag,
+		nor.refund_reason,
+		nst.star_name
+	FROM
+		ns_order AS nor
+	LEFT JOIN ns_star AS nst ON nor.key_id = nst.star_id
+	WHERE
+		1 = 1
+		AND is_deleted = 0
+	<if test="startDatetime !=null and startDatetime !=''">
+		<if test="endDatetime !=null and endDatetime !=''">
+			AND create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		</if>
+	</if>
+	<if test="orderTypeEq !=null and orderTypeEq !=''">
+		AND order_type = #{orderTypeEq}
+	</if>
+	<if test="paymentType !=null and paymentType !=''">
+		AND payment_type = #{paymentType}
+	</if>
+	<if test="orderNo !=null and orderNo !=''">
+		AND order_no = #{orderNo}
+	</if>
+	<if test="receiverName != null and receiverName !=''">
+		AND receiver_name LIKE '%${receiverName}%'
+	</if>
+	<if test="orderNoLike != null and orderNoLike !=''">
+		AND order_no LIKE '%${orderNoLike}%'
+	</if>
+	<if test="receiverMobile !=null and receiverMobile != ''">
+	   AND receiver_mobile = #{receiverMobile}
+	</if>
+	<if test="shippingType != null and shippingType != ''">
+	   AND shipping_type = #{shipping_type}
+	</if>
+	<if test="shopId !=null and shopId !=''">
+	   AND shop_id = #{shopId}
+	</if>
+	
+	<if test="orderStatus1 !=null and orderStatus1 !=''">
+	<if test="shippingStatus !=null and shippingStatus !=''">
+	   AND shipping_status = #{shippingStatus}
+	</if>
+	<if test="payStatus !=null and payStatus !=''">
+	   AND pay_status = #{payStatus}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+	   AND order_status != 4 AND order_status != 5
+	</if>
+	</if>
+	
+	<if test="orderStatus0 !=null and orderStatus0 !=''">
+	   AND order_status = #{orderStatus0}
+	</if>
+	
+	<if test="orderStatus2 != null and orderStatus2 != ''">
+	   AND order_status = #{orderStatus2}
+	</if>
+	
+	<if test="orderStatus3 != null and orderStatus3 != ''">
+	   AND order_status in (${orderStatus3})
+	</if>
+	
+	<if test="buyerId != null and buyerId != ''">
+	   AND buyer_id = #{buyerId}
+	</if>
+	
+	<if test="isDeleted != null and isDeleted != ''">
+	   AND is_deleted in (${isDeleted})
+	</if>
+	
+	<if test="isDeleted == null or isDeleted == ''">
+	   AND is_deleted = 0
+	</if>
+	
+	<if test="orderType !=null and orderType !=''">
+	  AND order_type in (#{orderType})
+	</if>
+	
+	<if test="starName != null and starName != ''">
+	   AND nst.star_name LIKE '%${starName}%'
+	</if>
+	ORDER BY
+	nor.create_time DESC
+	</select>
+	
+	<select id="queryPayTotal" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+	SELECT
+		SUM(nor.order_money) as payMoney
+	FROM
+		ns_order AS nor
+	LEFT JOIN ns_star AS nst ON nor.key_id = nst.star_id
+	WHERE
+		1 = 1
+		AND is_deleted = 0
+		AND order_type = 1
+		AND order_status >= 2
+		AND order_status != 5
+	<if test="startDatetime !=null and startDatetime !=''">
+		<if test="endDatetime !=null and endDatetime !=''">
+			AND create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		</if>
+	</if>
+	<if test="orderTypeEq !=null and orderTypeEq !=''">
+		AND order_type = #{orderTypeEq}
+	</if>
+	<if test="paymentType !=null and paymentType !=''">
+		AND payment_type = #{paymentType}
+	</if>
+	<if test="orderNo !=null and orderNo !=''">
+		AND order_no = #{orderNo}
+	</if>
+	<if test="receiverName != null and receiverName !=''">
+		AND receiver_name LIKE '%${receiverName}%'
+	</if>
+	<if test="orderNoLike != null and orderNoLike !=''">
+		AND order_no LIKE '%${orderNoLike}%'
+	</if>
+	<if test="receiverMobile !=null and receiverMobile != ''">
+	   AND receiver_mobile = #{receiverMobile}
+	</if>
+	<if test="shippingType != null and shippingType != ''">
+	   AND shipping_type = #{shipping_type}
+	</if>
+	<if test="shopId !=null and shopId !=''">
+	   AND shop_id = #{shopId}
+	</if>
+	
+	<if test="orderStatus1 !=null and orderStatus1 !=''">
+	<if test="shippingStatus !=null and shippingStatus !=''">
+	   AND shipping_status = #{shippingStatus}
+	</if>
+	<if test="payStatus !=null and payStatus !=''">
+	   AND pay_status = #{payStatus}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+	   AND order_status != 4 AND order_status != 5
+	</if>
+	</if>
+	
+	<if test="orderStatus0 !=null and orderStatus0 !=''">
+	   AND order_status = #{orderStatus0}
+	</if>
+	
+	<if test="orderStatus2 != null and orderStatus2 != ''">
+	   AND order_status = #{orderStatus2}
+	</if>
+	
+	<if test="buyerId != null and buyerId != ''">
+	   AND buyer_id = #{buyerId}
+	</if>
+	
+	<if test="isDeleted != null and isDeleted != ''">
+	   AND is_deleted = #{isDeleted}
+	</if>
+	
+	<if test="isDeleted == null or isDeleted == ''">
+	   AND is_deleted = 0
+	</if>
+	
+	<if test="orderType !=null and orderType !=''">
+	  AND order_type in (#{orderType})
+	</if>
+	
+	<if test="starName != null and starName != ''">
+	   AND nst.star_name LIKE '%${starName}%'
+	</if>
+	ORDER BY
+	nor.create_time DESC
+	</select>
+	
+	<select id="queryLeftTotal" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+	SELECT
+		SUM(nor.order_money) as leftMoney
+	FROM
+		ns_order AS nor
+	LEFT JOIN ns_star AS nst ON nor.key_id = nst.star_id
+	WHERE
+		1 = 1
+		AND is_deleted = 0
+		AND order_type = 1
+		AND order_status = 0
+		AND order_status != 5
+	<if test="startDatetime !=null and startDatetime !=''">
+		<if test="endDatetime !=null and endDatetime !=''">
+			AND create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		</if>
+	</if>
+	<if test="orderTypeEq !=null and orderTypeEq !=''">
+		AND order_type = #{orderTypeEq}
+	</if>
+	<if test="paymentType !=null and paymentType !=''">
+		AND payment_type = #{paymentType}
+	</if>
+	<if test="orderNo !=null and orderNo !=''">
+		AND order_no = #{orderNo}
+	</if>
+	<if test="receiverName != null and receiverName !=''">
+		AND receiver_name LIKE '%${receiverName}%'
+	</if>
+	<if test="orderNoLike != null and orderNoLike !=''">
+		AND order_no LIKE '%${orderNoLike}%'
+	</if>
+	<if test="receiverMobile !=null and receiverMobile != ''">
+	   AND receiver_mobile = #{receiverMobile}
+	</if>
+	<if test="shippingType != null and shippingType != ''">
+	   AND shipping_type = #{shipping_type}
+	</if>
+	<if test="shopId !=null and shopId !=''">
+	   AND shop_id = #{shopId}
+	</if>
+	
+	<if test="orderStatus1 !=null and orderStatus1 !=''">
+	<if test="shippingStatus !=null and shippingStatus !=''">
+	   AND shipping_status = #{shippingStatus}
+	</if>
+	<if test="payStatus !=null and payStatus !=''">
+	   AND pay_status = #{payStatus}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+	   AND order_status != 4 AND order_status != 5
+	</if>
+	</if>
+	
+	<if test="orderStatus0 !=null and orderStatus0 !=''">
+	   AND order_status = #{orderStatus0}
+	</if>
+	
+	<if test="orderStatus2 != null and orderStatus2 != ''">
+	   AND order_status = #{orderStatus2}
+	</if>
+	
+	<if test="buyerId != null and buyerId != ''">
+	   AND buyer_id = #{buyerId}
+	</if>
+	
+	<if test="isDeleted != null and isDeleted != ''">
+	   AND is_deleted = #{isDeleted}
+	</if>
+	
+	<if test="isDeleted == null or isDeleted == ''">
+	   AND is_deleted = 0
+	</if>
+	
+	<if test="orderType !=null and orderType !=''">
+	  AND order_type in (#{orderType})
+	</if>
+	
+	<if test="starName != null and starName != ''">
+	   AND nst.star_name LIKE '%${starName}%'
+	</if>
+	ORDER BY
+	nor.create_time DESC
+	</select>
+	
+	<select id="queryPayPoint" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+	SELECT
+		SUM(nor.order_money) as payPoint
+	FROM
+		ns_order AS nor
+	LEFT JOIN ns_star AS nst ON nor.key_id = nst.star_id
+	WHERE
+		1 = 1
+		AND is_deleted = 0
+		AND order_type = 2
+		AND order_status >= 2
+		AND order_status != 5
+	<if test="startDatetime !=null and startDatetime !=''">
+		<if test="endDatetime !=null and endDatetime !=''">
+			AND create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		</if>
+	</if>
+	<if test="orderTypeEq !=null and orderTypeEq !=''">
+		AND order_type = #{orderTypeEq}
+	</if>
+	<if test="paymentType !=null and paymentType !=''">
+		AND payment_type = #{paymentType}
+	</if>
+	<if test="orderNo !=null and orderNo !=''">
+		AND order_no = #{orderNo}
+	</if>
+	<if test="receiverName != null and receiverName !=''">
+		AND receiver_name LIKE '%${receiverName}%'
+	</if>
+	<if test="orderNoLike != null and orderNoLike !=''">
+		AND order_no LIKE '%${orderNoLike}%'
+	</if>
+	<if test="receiverMobile !=null and receiverMobile != ''">
+	   AND receiver_mobile = #{receiverMobile}
+	</if>
+	<if test="shippingType != null and shippingType != ''">
+	   AND shipping_type = #{shipping_type}
+	</if>
+	<if test="shopId !=null and shopId !=''">
+	   AND shop_id = #{shopId}
+	</if>
+	
+	<if test="orderStatus1 !=null and orderStatus1 !=''">
+	<if test="shippingStatus !=null and shippingStatus !=''">
+	   AND shipping_status = #{shippingStatus}
+	</if>
+	<if test="payStatus !=null and payStatus !=''">
+	   AND pay_status = #{payStatus}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+	   AND order_status != 4 AND order_status != 5
+	</if>
+	</if>
+	
+	<if test="orderStatus0 !=null and orderStatus0 !=''">
+	   AND order_status = #{orderStatus0}
+	</if>
+	
+	<if test="orderStatus2 != null and orderStatus2 != ''">
+	   AND order_status = #{orderStatus2}
+	</if>
+	
+	<if test="buyerId != null and buyerId != ''">
+	   AND buyer_id = #{buyerId}
+	</if>
+	
+	<if test="isDeleted != null and isDeleted != ''">
+	   AND is_deleted = #{isDeleted}
+	</if>
+	
+	<if test="isDeleted == null or isDeleted == ''">
+	   AND is_deleted = 0
+	</if>
+	
+	<if test="orderType !=null and orderType !=''">
+	  AND order_type in (#{orderType})
+	</if>
+	
+	<if test="starName != null and starName != ''">
+	   AND nst.star_name LIKE '%${starName}%'
+	</if>
+	ORDER BY
+	nor.create_time DESC
+	</select>
+	
+	<select id="queryLeftPoint" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+	SELECT
+		SUM(nor.order_money) as leftPoint
+	FROM
+		ns_order AS nor
+	LEFT JOIN ns_star AS nst ON nor.key_id = nst.star_id
+	WHERE
+		1 = 1
+		AND is_deleted = 0
+		AND order_type = 2
+		AND order_status = 0
+		AND order_status != 5
+	<if test="startDatetime !=null and startDatetime !=''">
+		<if test="endDatetime !=null and endDatetime !=''">
+			AND create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		</if>
+	</if>
+	<if test="orderTypeEq !=null and orderTypeEq !=''">
+		AND order_type = #{orderTypeEq}
+	</if>
+	<if test="paymentType !=null and paymentType !=''">
+		AND payment_type = #{paymentType}
+	</if>
+	<if test="orderNo !=null and orderNo !=''">
+		AND order_no = #{orderNo}
+	</if>
+	<if test="receiverName != null and receiverName !=''">
+		AND receiver_name LIKE '%${receiverName}%'
+	</if>
+	<if test="orderNoLike != null and orderNoLike !=''">
+		AND order_no LIKE '%${orderNoLike}%'
+	</if>
+	<if test="receiverMobile !=null and receiverMobile != ''">
+	   AND receiver_mobile = #{receiverMobile}
+	</if>
+	<if test="shippingType != null and shippingType != ''">
+	   AND shipping_type = #{shipping_type}
+	</if>
+	<if test="shopId !=null and shopId !=''">
+	   AND shop_id = #{shopId}
+	</if>
+	
+	<if test="orderStatus1 !=null and orderStatus1 !=''">
+	<if test="shippingStatus !=null and shippingStatus !=''">
+	   AND shipping_status = #{shippingStatus}
+	</if>
+	<if test="payStatus !=null and payStatus !=''">
+	   AND pay_status = #{payStatus}
+	</if>
+	<if test="orderStatus !=null and orderStatus !=''">
+	   AND order_status != 4 AND order_status != 5
+	</if>
+	</if>
+	
+	<if test="orderStatus0 !=null and orderStatus0 !=''">
+	   AND order_status = #{orderStatus0}
+	</if>
+	
+	<if test="orderStatus2 != null and orderStatus2 != ''">
+	   AND order_status = #{orderStatus2}
+	</if>
+	
+	<if test="buyerId != null and buyerId != ''">
+	   AND buyer_id = #{buyerId}
+	</if>
+	
+	<if test="isDeleted != null and isDeleted != ''">
+	   AND is_deleted = #{isDeleted}
+	</if>
+	
+	<if test="isDeleted == null or isDeleted == ''">
+	   AND is_deleted = 0
+	</if>
+	
+	<if test="orderType !=null and orderType !=''">
+	  AND order_type in (#{orderType})
+	</if>
+	
+	<if test="starName != null and starName != ''">
+	   AND nst.star_name LIKE '%${starName}%'
+	</if>
+	ORDER BY
+	nor.create_time DESC
+	</select>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.cms.dao.CmsArticleSimpleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.cms.entity.CmsArticleSimpleEntity" id="cmsArticleSimpleMap">
+        <result property="articleId" column="article_id"/>
+        <result property="title" column="title"/>
+        <result property="classId" column="class_id"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+    
+    <select id="queryWithSort" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.cms.entity.CmsArticleSimpleEntity">
+		SELECT
+			article_id,
+			title,
+			class_id,
+			content,
+			banner,
+			create_time,
+			sort
+		FROM
+			ns_cms_article_simple
+		ORDER BY
+			sort IS NULL,
+			sort ASC,
+			create_time DESC
+	</select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.sms.dao.SysNoticeRecordsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.sms.entity.SysNoticeRecordsEntity" id="sysNoticeRecordsMap">
+        <result property="id" column="id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="uid" column="uid"/>
+        <result property="sendType" column="send_type"/>
+        <result property="sendAccount" column="send_account"/>
+        <result property="sendConfig" column="send_config"/>
+        <result property="recordsType" column="records_type"/>
+        <result property="noticeTitle" column="notice_title"/>
+        <result property="noticeContext" column="notice_context"/>
+        <result property="isSend" column="is_send"/>
+        <result property="sendMessage" column="send_message"/>
+        <result property="createDate" column="create_date"/>
+        <result property="sendDate" column="send_date"/>
+    </resultMap>
+
+
+</mapper>

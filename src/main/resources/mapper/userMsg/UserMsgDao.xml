@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.userMsg.dao.UserMsgDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.userMsg.entity.UserMsgEntity" id="userMsgMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="recieveDate" column="recieve_date"/>
+        <result property="msgId" column="msg_id"/>
+        <result property="isRead" column="is_read"/>
+    </resultMap>
+
+	<select id="queryByMsgType" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.userMsg.entity.UserMsgEntity">
+		SELECT
+			num.id,
+			num.uid,
+			num.recieve_date,
+			num.msg_id,
+			num.is_read,
+			sm.msg_type
+		FROM
+			ns_user_msg num
+		LEFT JOIN sys_msg sm ON num.msg_id = sm.id 
+		WHERE
+			1 = 1 
+		<if test="isRead !=null and isRead !=''">
+			AND num.is_read = #{isRead}
+		</if>
+		<if test="msgType !=null and msgType !=''">
+			AND sm.msg_type = #{msgType}
+		</if>
+		<if test="uid !=null and uid !=''">
+			AND num.uid = #{uid}
+		</if>
+		ORDER BY num.recieve_date DESC
+	</select>
+</mapper>

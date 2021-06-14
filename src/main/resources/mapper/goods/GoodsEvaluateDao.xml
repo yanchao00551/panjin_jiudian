@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.goods.dao.GoodsEvaluateDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.goods.entity.GoodsEvaluateEntity" id="goodsEvaluateMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="orderGoodsId" column="order_goods_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="goodsImage" column="goods_image"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="content" column="content"/>
+        <result property="image" column="image"/>
+        <result property="explainFirst" column="explain_first"/>
+        <result property="memberName" column="member_name"/>
+        <result property="uid" column="uid"/>
+        <result property="isAnonymous" column="is_anonymous"/>
+        <result property="scores" column="scores"/>
+        <result property="againContent" column="again_content"/>
+        <result property="againImage" column="again_image"/>
+        <result property="againExplain" column="again_explain"/>
+        <result property="explainType" column="explain_type"/>
+        <result property="isShow" column="is_show"/>
+        <result property="addtime" column="addtime"/>
+        <result property="againAddtime" column="again_addtime"/>
+    </resultMap>
+
+
+    <!-- 商品评价记录查询 -->
+	<select id="getGoodsEvaluateList" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.goods.entity.GoodsEvaluateEntity">
+		SELECT * FROM ns_goods_evaluate
+		WHERE 1=1
+		<if test="goodsName != null and goodsName !=''">
+			AND goods_name LIKE '%${goodsName}%'
+		</if>
+		<if test="memberName != null and memberName !=''">
+			AND member_name LIKE '%${memberName}%'
+		</if>
+		
+		<if test="startDatetime !=null and startDatetime !=''">
+		  <if test="endDatetime !=null and endDatetime !=''">
+			AND addtime BETWEEN #{startDatetime} AND #{endDatetime}
+		  </if>
+		</if>
+		
+		<if test="explainType !=null and explainType !=''">
+			AND explain_type =#{explainType}
+		</if>
+		ORDER BY addtime DESC
+	</select>
+
+
+</mapper>

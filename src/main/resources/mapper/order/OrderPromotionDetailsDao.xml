@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.OrderPromotionDetailsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.OrderPromotionDetailsEntity" id="orderPromotionDetailsMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="promotionTypeId" column="promotion_type_id"/>
+        <result property="promotionId" column="promotion_id"/>
+        <result property="promotionType" column="promotion_type"/>
+        <result property="promotionName" column="promotion_name"/>
+        <result property="promotionCondition" column="promotion_condition"/>
+        <result property="discountMoney" column="discount_money"/>
+        <result property="usedTime" column="used_time"/>
+    </resultMap>
+
+
+</mapper>

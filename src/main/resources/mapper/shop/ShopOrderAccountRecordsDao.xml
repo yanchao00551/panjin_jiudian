@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.shop.dao.ShopOrderAccountRecordsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.shop.entity.ShopOrderAccountRecordsEntity" id="shopOrderAccountRecordsMap">
+        <result property="id" column="id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="orderGoodsId" column="order_goods_id"/>
+        <result property="goodsPayMoney" column="goods_pay_money"/>
+        <result property="rate" column="rate"/>
+        <result property="shopMoney" column="shop_money"/>
+        <result property="platformMoney" column="platform_money"/>
+        <result property="isRefund" column="is_refund"/>
+        <result property="refundMoney" column="refund_money"/>
+        <result property="shopRefundMoney" column="shop_refund_money"/>
+        <result property="platformRefundMoney" column="platform_refund_money"/>
+        <result property="isIssue" column="is_issue"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.promotion.dao.NsPromotionGamesWinningRecordsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.promotion.entity.NsPromotionGamesWinningRecordsEntity" id="nsPromotionGamesWinningRecordsMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="isUse" column="is_use"/>
+        <result property="gameId" column="game_id"/>
+        <result property="gameType" column="game_type"/>
+        <result property="type" column="type"/>
+        <result property="points" column="points"/>
+        <result property="hongbao" column="hongbao"/>
+        <result property="couponId" column="coupon_id"/>
+        <result property="giftId" column="gift_id"/>
+        <result property="remark" column="remark"/>
+        <result property="isWinning" column="is_winning"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="addTime" column="add_time"/>
+        <result property="ruleId" column="rule_id"/>
+        <result property="associatedGiftRecordId" column="associated_gift_record_id"/>
+    </resultMap>
+
+
+</mapper>

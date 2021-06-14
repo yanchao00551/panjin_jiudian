@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.member.dao.MemberBankAccountDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.member.entity.MemberBankAccountEntity" id="memberBankAccountMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="branchBankName" column="branch_bank_name"/>
+        <result property="realname" column="realname"/>
+        <result property="accountNumber" column="account_number"/>
+        <result property="mobile" column="mobile"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+        <result property="accountType" column="account_type"/>
+        <result property="accountTypeName" column="account_type_name"/>
+    </resultMap>
+
+
+</mapper>

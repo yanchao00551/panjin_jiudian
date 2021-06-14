@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.smsMsgRecord.dao.SmsMsgRecordDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.smsMsgRecord.entity.SmsMsgRecordEntity" id="smsMsgRecordMap">
+        <result property="id" column="id"/>
+        <result property="remoteIp" column="remote_ip"/>
+        <result property="sendTime" column="send_time"/>
+        <result property="sendType" column="send_type"/>
+    </resultMap>
+
+	<select id="queryNewestRecord" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.smsMsgRecord.entity.SmsMsgRecordEntity">
+		SELECT
+			send_time
+		FROM
+			ns_sms_msg_record
+		WHERE
+			1 = 1
+			<if test="remoteIp !=null and remoteIp !=''">
+				AND remote_ip = #{remoteIp}
+			</if>
+			<if test="sendType !=null and sendType !=''">
+				AND send_type = #{sendType}
+			</if>
+		ORDER BY
+			send_time DESC
+		LIMIT 1
+	</select>
+	
+	<select id="querySentCount" parameterType="java.util.Map"
+		resultType="integer">
+		SELECT
+			count(send_time)
+		FROM
+			ns_sms_msg_record
+		WHERE
+			1 = 1
+			<if test="remoteIp !=null and remoteIp !=''">
+				AND remote_ip = #{remoteIp}
+			</if>
+			<if test="sendType !=null and sendType !=''">
+				AND send_type = #{sendType}
+			</if>
+			AND to_days(send_time) = to_days(now())
+	</select>
+</mapper>

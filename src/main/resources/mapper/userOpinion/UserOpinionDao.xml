@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.userOpinion.dao.UserOpinionDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.userOpinion.entity.UserOpinionEntity" id="userOpinionMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="cotent" column="cotent"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+	<select id="queryContainsUserInfo"  parameterType="java.util.Map" resultType="com.jiudian.modules.userOpinion.entity.UserOpinionEntity">
+	SELECT
+		nuo.id,
+		nuo.uid,
+		nuo.cotent,
+		nuo.create_date,
+		tu.nick_name
+	FROM
+		ns_user_opinion AS nuo
+	LEFT JOIN tb_user AS tu ON nuo.uid = tu.user_id
+	WHERE
+		1 = 1
+	<if test="startDatetime !=null and startDatetime !=''">
+	  <if test="endDatetime !=null and endDatetime !=''">
+		AND nuo.create_date BETWEEN #{startDatetime} AND #{endDatetime}
+	  </if>
+	</if>
+	<if test="nickName != null and nickName !=''">
+		AND tu.nick_name LIKE '%${nickName}%'
+	</if>
+	</select>
+
+</mapper>

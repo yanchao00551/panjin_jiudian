@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.weixin.dao.SysWeixinMenuDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.weixin.entity.SysWeixinMenuEntity" id="sysWeixinMenuMap">
+        <result property="menuId" column="menu_id"/>
+        <result property="instanceId" column="instance_id"/>
+        <result property="menuName" column="menu_name"/>
+        <result property="ico" column="ico"/>
+        <result property="pid" column="pid"/>
+        <result property="menuEventType" column="menu_event_type"/>
+        <result property="mediaId" column="media_id"/>
+        <result property="menuEventUrl" column="menu_event_url"/>
+        <result property="hits" column="hits"/>
+        <result property="sort" column="sort"/>
+        <result property="createDate" column="create_date"/>
+        <result property="modifyDate" column="modify_date"/>
+    </resultMap>
+
+
+</mapper>

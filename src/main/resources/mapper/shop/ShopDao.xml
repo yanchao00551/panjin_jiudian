@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.shop.dao.ShopDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.shop.entity.ShopEntity" id="shopMap">
+        <result property="shopId" column="shop_id"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="shopType" column="shop_type"/>
+        <result property="uid" column="uid"/>
+        <result property="shopGroupId" column="shop_group_id"/>
+        <result property="shopCompanyName" column="shop_company_name"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="shopAddress" column="shop_address"/>
+        <result property="shopZip" column="shop_zip"/>
+        <result property="shopState" column="shop_state"/>
+        <result property="shopCloseInfo" column="shop_close_info"/>
+        <result property="shopSort" column="shop_sort"/>
+        <result property="shopLogo" column="shop_logo"/>
+        <result property="shopBanner" column="shop_banner"/>
+        <result property="shopAvatar" column="shop_avatar"/>
+        <result property="shopKeywords" column="shop_keywords"/>
+        <result property="shopDescription" column="shop_description"/>
+        <result property="shopQq" column="shop_qq"/>
+        <result property="shopWw" column="shop_ww"/>
+        <result property="shopPhone" column="shop_phone"/>
+        <result property="shopDomain" column="shop_domain"/>
+        <result property="shopDomainTimes" column="shop_domain_times"/>
+        <result property="shopRecommend" column="shop_recommend"/>
+        <result property="shopCredit" column="shop_credit"/>
+        <result property="shopDesccredit" column="shop_desccredit"/>
+        <result property="shopServicecredit" column="shop_servicecredit"/>
+        <result property="shopDeliverycredit" column="shop_deliverycredit"/>
+        <result property="shopCollect" column="shop_collect"/>
+        <result property="shopStamp" column="shop_stamp"/>
+        <result property="shopPrintdesc" column="shop_printdesc"/>
+        <result property="shopSales" column="shop_sales"/>
+        <result property="shopAccount" column="shop_account"/>
+        <result property="shopCash" column="shop_cash"/>
+        <result property="shopWorkingtime" column="shop_workingtime"/>
+        <result property="liveStoreName" column="live_store_name"/>
+        <result property="liveStoreAddress" column="live_store_address"/>
+        <result property="liveStoreTel" column="live_store_tel"/>
+        <result property="liveStoreBus" column="live_store_bus"/>
+        <result property="shopVrcodePrefix" column="shop_vrcode_prefix"/>
+        <result property="storeQtian" column="store_qtian"/>
+        <result property="shopZhping" column="shop_zhping"/>
+        <result property="shopErxiaoshi" column="shop_erxiaoshi"/>
+        <result property="shopTuihuo" column="shop_tuihuo"/>
+        <result property="shopShiyong" column="shop_shiyong"/>
+        <result property="shopShiti" column="shop_shiti"/>
+        <result property="shopXiaoxie" column="shop_xiaoxie"/>
+        <result property="shopHuodaofk" column="shop_huodaofk"/>
+        <result property="shopFreeTime" column="shop_free_time"/>
+        <result property="shopRegion" column="shop_region"/>
+        <result property="recommendUid" column="recommend_uid"/>
+        <result property="shopQrcode" column="shop_qrcode"/>
+        <result property="shopCreateTime" column="shop_create_time"/>
+        <result property="shopEndTime" column="shop_end_time"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.member.dao.MemberPartnerDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.member.entity.MemberPartnerEntity" id="memberPartnerMap">
+        <result property="partnerId" column="partner_id"/>
+        <result property="uid" column="uid"/>
+        <result property="createTime" column="create_time"/>
+        <result property="lastTime" column="last_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    
+    
+    <!-- 发布单列表 条件查询 -->
+	<select id="queryByPartnerList"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberPartnerEntity">
+		SELECT
+		a.partner_id,
+		a.uid,
+		a.create_time,
+		a.status,
+		c.user_tel,
+		c.real_name,
+		c.nick_name,
+		c.username AS memberName,c.nick_name AS qNickname,c.user_headimg as userHeadimg,
+		c.mobile,c.user_email,c.reg_time,c.last_login_time,
+		b.level_name
+		FROM ns_member_partner as a
+		LEFT JOIN ns_member AS d ON a.uid = d.uid
+		LEFT JOIN tb_user AS c ON a.uid = c.user_id
+		LEFT JOIN ns_member_level AS b ON d.member_level = b.level_id
+		WHERE 1=1
+		<if test="username != null and username !=''">
+			AND d.member_name LIKE '%${username}%'
+		</if>
+		<if test="uid != null and uid !=''">
+		    AND a.uid = #{uid}
+		</if>
+		<if test="status != null and status !=''">
+		    AND a.status = #{status}
+		</if>
+		ORDER BY a.create_time
+		DESC
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.promotion.dao.NsPromotionGamesDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.promotion.entity.NsPromotionGamesEntity" id="nsPromotionGamesMap">
+        <result property="gameId" column="game_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="name" column="name"/>
+        <result property="gameType" column="game_type"/>
+        <result property="memberLevel" column="member_level"/>
+        <result property="levelName" column="level_name"/>
+        <result property="points" column="points"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="winningRate" column="winning_rate"/>
+        <result property="noWinningDes" column="no_winning_des"/>
+        <result property="activityImages" column="activity_images"/>
+        <result property="winningListDisplay" column="winning_list_display"/>
+        <result property="joinType" column="join_type"/>
+        <result property="joinFrequency" column="join_frequency"/>
+        <result property="winningType" column="winning_type"/>
+        <result property="winningMax" column="winning_max"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.shop.dao.OrderShopReturnDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.shop.entity.OrderShopReturnEntity" id="orderShopReturnMap">
+        <result property="shopId" column="shop_id"/>
+        <result property="shopAddress" column="shop_address"/>
+        <result property="sellerName" column="seller_name"/>
+        <result property="sellerMobile" column="seller_mobile"/>
+        <result property="sellerZipcode" column="seller_zipcode"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.sysMsg.dao.SysMsgDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.sysMsg.entity.SysMsgEntity" id="sysMsgMap">
+        <result property="id" column="id"/>
+        <result property="toType" column="to_type"/>
+        <result property="msgType" column="msg_type"/>
+        <result property="title" column="title"/>
+        <result property="msgContent" column="msg_content"/>
+        <result property="sendTimes" column="send_times"/>
+        <result property="createDate" column="create_date"/>
+        <result property="lastSendDate" column="last_send_date"/>
+        <result property="img" column="img"/>
+    </resultMap>
+</mapper>

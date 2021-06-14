@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.OrderShippingFeeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.OrderShippingFeeEntity" id="orderShippingFeeMap">
+        <result property="shippingFeeId" column="shipping_fee_id"/>
+        <result property="shippingFeeName" column="shipping_fee_name"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="coId" column="co_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="provinceIdArray" column="province_id_array"/>
+        <result property="cityIdArray" column="city_id_array"/>
+        <result property="weightIsUse" column="weight_is_use"/>
+        <result property="weightSnum" column="weight_snum"/>
+        <result property="weightSprice" column="weight_sprice"/>
+        <result property="weightXnum" column="weight_xnum"/>
+        <result property="weightXprice" column="weight_xprice"/>
+        <result property="volumeIsUse" column="volume_is_use"/>
+        <result property="volumeSnum" column="volume_snum"/>
+        <result property="volumeSprice" column="volume_sprice"/>
+        <result property="volumeXnum" column="volume_xnum"/>
+        <result property="volumeXprice" column="volume_xprice"/>
+        <result property="bynumIsUse" column="bynum_is_use"/>
+        <result property="bynumSnum" column="bynum_snum"/>
+        <result property="bynumSprice" column="bynum_sprice"/>
+        <result property="bynumXnum" column="bynum_xnum"/>
+        <result property="bynumXprice" column="bynum_xprice"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="districtIdArray" column="district_id_array"/>
+    </resultMap>
+
+
+</mapper>

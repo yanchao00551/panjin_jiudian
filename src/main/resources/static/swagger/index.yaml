@@ -1,0 +1,2820 @@
+swagger: '2.0'
+info:
+  description: 盘锦酒店分销系统 V1.0 API接口文档
+  version: 1.0.0
+  title: 盘锦酒店分销
+basePath: /panjin_jiudian
+schemes:
+  - http
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: token
+    in: header
+    
+paths:
+  /app/wxpay/wxOrderPrePay:
+    get:
+      tags:
+        - 支付
+      summary: 微信酒店订单统一下单
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+        - name: usePoint
+          description: 使用积分数
+          in: query
+          type: string
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/wxpay/wxRechargePrePay:
+    get:
+      tags:
+        - 支付
+      summary: 微信充值订单统一下单
+      produces:
+        - application/json
+      parameters:
+        - name: money
+          description: 充值金额
+          in: query
+          type: double
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/alipay/aliOrderPrePay:
+    get:
+      tags:
+        - 支付
+      summary: 支付宝酒店订单统一下单
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+        - name: useSandBox
+          description: 是否使用沙箱环境（正式环境不要填此参数，使用填"0"）
+          in: query
+          type: integer
+          required: true
+        - name: usePoint
+          description: 使用积分数
+          in: query
+          type: string
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/alipay/aliRechargePrePay:
+    get:
+      tags:
+        - 支付
+      summary: 支付宝充值订单统一下单
+      produces:
+        - application/json
+      parameters:
+        - name: money
+          description: 充值金额
+          in: query
+          type: double
+          required: true
+        - name: useSandBox
+          description: 是否使用沙箱环境（正式环境不要填此参数，使用填"0"）
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+
+  /app/constant/hotelAddr:
+    get:
+      tags:
+        - 静态信息
+      summary: 酒店地址
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/constant/aboutUs:
+    get:
+      tags:
+        - 静态信息
+      summary: 关于我们
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/constant/bgm:
+    get:
+      tags:
+        - 静态信息
+      summary: 背景音乐
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+
+  /app/constant/hotelNum:
+    get:
+      tags:
+        - 静态信息
+      summary: 酒店电话
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/constant/timeRanges:
+    get:
+      tags:
+        - 静态信息
+      summary: 收件时间区间
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getCustomerService:
+    get:
+      tags:
+        - 客户服务信息
+      summary: 获取客户服务信息
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/startPage:
+    get:
+      tags:
+        - 首页
+      summary: 获取首页信息
+      produces:
+        - application/json
+      parameters:
+        - name: roomPage
+          description: 房间当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: roomLimit
+          description: 房间每页条数
+          in: query
+          type: integer
+          default: 5
+          required: true
+        - name: goodPage
+          description: 商品当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: goodLimit
+          description: 商品每页条数
+          in: query
+          type: integer
+          default: 5
+          required: true
+        - name: cmsPage
+          description: 新闻当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: cmsLimit
+          description: 新闻每页条数
+          in: query
+          type: integer
+          default: 5
+          required: true
+        - name: categoryId
+          description: 商品categoryId
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getGroupList:
+    get:
+      tags:
+        - 首页
+      summary: 获取商品标签列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getCategoryList:
+    get:
+      tags:
+        - 首页
+      summary: 获取商品分类列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getMemberExpressAddressList:
+    get:
+      tags:
+        - 用户中心
+      summary: 收获地址列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  
+  /app/operationAddress:
+    post:
+      tags:
+        - 用户中心
+      summary: 编辑或添加收货地址
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/OperationAddressForm'
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getDefaultExpressAddress:
+    get:
+      tags:
+        - 用户中心
+      summary: 获取会员默认收货地址
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getMemberExpressAddressDetail:
+    get:
+      tags:
+        - 用户中心
+      summary: 获取会员收货地址详情
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: 收货地址ID-收货地址列表接口有返回
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/memberAddressDelete:
+    post:
+      tags:
+        - 用户中心
+      summary: 删除会员收货地址
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: 收货地址ID-收货地址列表接口有返回
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/updateAddressDefault:
+    post:
+      tags:
+        - 用户中心
+      summary: 修改会员默认收货地址
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/MemberExpressAddressEntity'
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/setUserPaymentPassword:
+    post:
+      tags:
+        - 用户中心
+      summary: 设置会员支付密码
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/PaymentPassword'
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/findUserPaymentPassword:
+    post:
+      tags:
+        - 用户中心
+      summary: 会员支付密码找回
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: 管理员对象
+          in: body
+          type: string
+          schema:
+            $ref: '#/definitions/ValidateNumForm'
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+            
+  /app/hasPayPwd:
+    get:
+      tags:
+        - 用户中心
+      summary: 是否设置支付密码
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+  
+  /app/updateUserPaymentPassword:
+    psot:
+      tags:
+        - 用户中心
+      summary: 修改用户支付密码
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/UpdatePaymentPassword'
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/confirmOrder:
+    get:
+      tags:
+        - 订单管理
+      summary: 获取确认订单信息
+      produces:
+        - application/json
+      parameters:
+        - name: goods_id_list
+          description: 商品ID列表（以英文逗号分隔）
+          in: query
+          type: string
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/generateOrder:
+    post:
+      tags:
+        - 订单管理
+      summary: 生成订单
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/OrderForm'
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/goodsOrderList:
+    get:
+      tags:
+        - 订单管理
+      summary: 获取订单列表
+      produces:
+        - application/json
+      parameters:
+        - name: orderType
+          description: 订单类型 1酒店 2非酒店
+          in: query
+          type: integer
+          required: true
+        - name: orderStatus2
+          description: 订单状态0待付款 1 待发货  2 已发货=待收货 3 已收货=待评价 4已完成
+          in: query
+          type: integer
+          required: false
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/goodsOrderDetail:
+    get:
+      tags:
+        - 订单管理
+      summary: 获取订单详情
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/commitRecieve:
+    post:
+      tags:
+        - 订单管理
+      summary: 确认收货
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/cancelOrder:
+    post:
+      tags:
+        - 订单管理
+      summary: 取消订单
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/dropOrder:
+    post:
+      tags:
+        - 订单管理
+      summary: 删除订单
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/payGoods:
+    post:
+      tags:
+        - 支付
+      summary: 商城订单结算（积分支付）
+      produces:
+        - application/json
+      parameters:
+         - name: body
+           description: json对象
+           in: body
+           type: string
+           schema: 
+              $ref: '#/definitions/PayForm'
+           required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/payByBalance:
+    post:
+      tags:
+        - 支付
+      summary: 酒店订单结算（余额支付）
+      produces:
+        - application/json
+      parameters:
+         - name: body
+           description: json对象
+           in: body
+           type: string
+           schema: 
+              $ref: '#/definitions/PayForm'
+           required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/commentGoods:
+    post:
+      tags:
+        - 订单管理
+      summary: 评价商品
+      produces:
+        - application/json
+      parameters:
+        - name: order_id
+          description: 订单ID
+          in: query
+          type: integer
+          required: true
+        - name: goods_id
+          description: 商品ID
+          in: query
+          type: integer
+          required: true
+        - name: point
+          description: 评分
+          in: query
+          type: double
+          required: true
+        - name: comments
+          description: 评价内容
+          in: query
+          type: string
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getComments:
+    get:
+      tags:
+        - 订单管理
+      summary: 获取商品评价信息
+      produces:
+        - application/json
+      parameters:
+        - name: goodsId
+          description: 商品ID
+          in: query
+          type: integer
+          required: true
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getInvoiceList:
+    get:
+      tags:
+        - 发票管理
+      summary: 获取发票列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getInvoiceDetail:
+    get:
+      tags:
+        - 发票管理
+      summary: 获取发票详细信息
+      produces:
+        - application/json
+      parameters:
+        - name: invoiceId
+          description: 发票ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/addInvoice:
+    post:
+      tags:
+        - 发票管理
+      summary: 新增发票配置
+      produces:
+        - application/json
+      parameters:
+         - name: body
+           description: json对象
+           in: body
+           type: string
+           schema: 
+              $ref: '#/definitions/InvoiceForm'
+           required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/dropInvoice:
+    post:
+      tags:
+        - 发票管理
+      summary: 删除发票配置
+      produces:
+        - application/json
+      parameters:
+        - name: invoiceId
+          description: 发票ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getAddress:
+    get:
+      tags:
+        - 省市区字典
+      summary: 获取地址 返回（例如： 山西省 太原市 小店区）
+      produces:
+        - application/json
+      parameters:
+        - provenceId:
+          description: 省ID
+          in: query
+          type: integer
+          required: true
+        - cityId:
+          description: 市ID
+          in: query
+          type: integer
+          required: true
+        - districtId:
+          description: 区ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getProvinceList:
+    get:
+      tags:
+        - 省市区字典
+      summary: 获取省列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getCityList:
+    get:
+      tags:
+        - 省市区字典
+      summary: 获取城市列表
+      produces:
+        - application/json
+      parameters:
+        - provinceId:
+          description: 省ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getDistrictList:
+    get:
+      tags:
+        - 省市区字典
+      summary: 获取区列表
+      produces:
+        - application/json
+      parameters:
+        - cityId:
+          description: 城市ID
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  
+  /app/getAllAddress:
+    get:
+      tags:
+        - 省市区字典
+      summary: 获取所有地址 省/市/区 列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/addCart:
+    post: 
+      tags:
+        - 商城和酒店购物车
+      summary: 加入购物车
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/AddCartForm'
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  /app/cart:
+    get:
+      tags:
+        - 商城和酒店购物车
+      summary: 购物车列表
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          description: 购物车类型 1.酒店类型 0.普通商品
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getGoodsCategory:
+    get:
+      tags:
+        - 商城和酒店购物车
+      summary: 获取商品分类列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  
+  /app/deleteShoppingCartById:
+    post:
+      tags:
+        - 商城和酒店购物车
+      summary:  根据cartId删除购物车中的商品
+      produces:
+        - application/json
+      parameters:
+        - name: cartId
+          description: 购物车ID 列表接口有返回
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/updateCartGoodsNumber:
+    post:
+      tags:
+        - 商城和酒店购物车
+      summary: 更新购物车中商品数量
+      produces:
+        - application/json
+      parameters:
+        - name: cartId
+          description: 购物车ID
+          in: query
+          type: integer
+          required: true
+        - name: goodsId
+          description: 商品ID
+          in: query
+          type: integer
+          required: true
+        - name: num
+          description: 商品数量
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+      
+      
+  /app/getGoodsDetail:
+    get:
+      tags:
+        - 商品
+      summary: 获取商品详情
+      produces:
+        - application/json
+      parameters:
+        - name: commentPage
+          description: 评价当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: commentLimit
+          description: 评价每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+        - name: goodsId
+          description: 商品ID
+          in: query
+          type: integer
+          default: 13
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+          
+  /app/goodsList:
+    get:
+      tags:
+        - 商品
+      summary: 获取商品列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+        - name: goodsAttributeId
+          description: 商品类型1酒店2非酒店
+          in: query
+          type: integer
+          required: true
+        - name: orderColum
+          description: 排序列1默认2销量3评分4售价
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: orderSection
+          description: 排序选项0升序1降序
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: categoryId
+          description: 商品分类ID
+          in: query
+          type: integer
+          required: true
+        - name: goodsName
+          description: 商品名称（搜索用，模糊查询，可不填）
+          in: query
+          type: string
+          required: false
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getRoomsList:
+    get:
+      tags:
+        - 商品
+      summary: 获取酒店房间列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+        - name: orderColum
+          description: 排序列1默认2销量3评分4售价
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: orderSection
+          description: 排序选项0升序1降序
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: groupIdArray
+          description: 房间类型（group）ID
+          in: query
+          type: integer
+          required: false
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getRoomDetail:
+    get:
+      tags:
+        - 商品
+      summary: 获取酒店房间详情
+      produces:
+        - application/json
+      parameters:
+        - name: goodsId
+          description: 房间ID
+          in: query
+          type: integer
+          required: true
+          
+  /app/getRoomDetailLogin:
+    get:
+      tags:
+        - 商品
+      summary: 获取酒店房间详情（需要登录）
+      produces:
+        - application/json
+      parameters:
+        - name: goodsId
+          description: 房间ID
+          in: query
+          type: integer
+          required: true
+             
+  /app/sexBoxList:
+    get:
+      tags:
+        - 营销概率游戏(九宫格)
+      summary: 获取九宫格奖品信息列表和机会数量和获奖记录列表
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  
+  /app/startDraw:
+    post:
+      tags:
+        - 营销概率游戏(九宫格)
+      summary: 开始抽奖
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+             
+  /app/getPrizeRecord:
+    get:
+      tags:
+        - 营销概率游戏(九宫格)
+      summary: 获取九宫格中奖记录
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+        - name: isAll
+          description: 是否全部记录（0否1是）
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+      
+  /app/uploadFile/uppload_common:
+    post:
+      tags:
+        - 图片上传
+      summary:  公共图片
+      produces:
+        - application/json
+      parameters:
+        - name: image
+          description: 文件对象
+          in: formData
+          type: file
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  
+  /app/uploadFile/upload_comment:
+    post:
+      tags:
+        - 图片上传
+      summary:  评论
+      produces:
+        - application/json
+      parameters:
+        - name: image
+          description: 文件对象
+          in: formData
+          type: file
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+  
+  /app/uploadFile/upload_avator:
+    post:
+      tags:
+        - 图片上传
+      summary:  用户头像
+      produces:
+        - application/json
+      parameters:
+        - name: image
+          description: 文件对象
+          in: formData
+          type: file
+          required: true
+      responses:
+        '200':
+          schema:
+             $ref: '#/definitions/R'
+   
+             
+  /app/userInfo:
+    get:
+      tags:
+        - 用户中心
+      summary: 获取用户信息
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/UserInfo'
+  
+  /app/getTeamList:
+    get:
+      tags:
+        - 用户中心
+      summary: 获取我的团队列表
+      produces:
+        - application/json
+      parameters:
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getUserLevel:
+    get:
+      tags:
+        - 用户中心
+      summary: 获取用户级别
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getTeamCount:
+    get:
+      tags:
+        - 用户中心
+      summary: 获取我的团队人数及排行
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/addPartner:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 申请合伙人
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/AddPartnerForm'
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getQRcode:
+    get: 
+      tags: 
+        - 用户中心
+      summary: 获取推广码
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          description: 平台类型 0IOS 1Android
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/pointExchange:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 余额兑换成积分
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/PointExchangeForm'
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getExchangeMaxPointNum:
+    get: 
+      tags: 
+        - 用户中心
+      summary: 获取最大可兑换积分额度
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getLeaderboard:
+    get: 
+      tags: 
+        - 用户中心
+      summary: 获取排行榜信息
+      parameters:
+        - name: groupId
+          description: 排行榜groupId
+          in: query
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema: '#/definitions/R'
+  
+  /app/setUserInfo:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 设置个人信息
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/SysUserEntity'
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/embody:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 提现申请
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/EmbodyForm'
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+  
+  
+  /app/getBankAccountList:
+    get: 
+      tags: 
+        - 用户中心
+      summary: 获取我的提现账号列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+
+          
+  /app/getBankAccountInfo:
+    get:
+      tags: 
+        - 用户中心
+      summary: 获取提现账号详情
+      produces:
+        - application/json
+      responses: 
+        '200':
+          schema: '#/definitions/R'
+  
+  /app/getBalanceAndPoint:
+    get:
+      tags: 
+        - 用户中心
+      summary: 获取我的余额及可提现额度和积分
+      produces:
+        - application/json
+      responses: 
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getFlowList:
+    get:
+      tags: 
+        - 用户中心
+      summary: 获取我的流水列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+        - name: searchText
+          description: 说明搜索
+          in: query
+          type: string
+          required: false
+        - name: startDatetime
+          description: 产生开始时间 时间戳 10位
+          in: query
+          type: integer
+          required: false
+        - name: endDatetime
+          description: 产生结束时间 时间戳 10位
+          in: query
+          type: integer
+          required: false
+        - name: accountType
+          description: 账户类型1.积分2.余额3.购物币
+          in: query
+          type: integer
+          required: true
+        - name: fromType
+          description: 产生方式0.all1.商城订单2.订单退还3.兑换4.充值5.签到6.分享7.注册8.提现9.提现退还10.调整11.参与营销游戏消耗积分12.返佣13.抽奖19.点赞20.评论
+          in: query
+          type: integer
+          required: true  
+      responses: 
+        '200':
+          schema: '#/definitions/R'
+  
+  /app/setGetCashInfo:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 新增/修改提现账号信息
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: 提现信息ID（新增时不填，由于目前一个用户只有一条信息，所以修改时如无法提供ID，请填0）
+          in: query
+          type: integer
+        - name: accountType
+          description: 账号类型1银行卡2微信3支付宝（参考设计稿，暂不支持银行卡提款，银行卡类型目前为预留）
+          in: query
+          type: integer
+          required: true
+        - name: realname
+          description: 真实姓名
+          in: query
+          type: string
+          required: true
+        - name: accountNumber
+          description: 提现账号
+          in: query
+          type: string
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/setPassword:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 重置密码
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: json对象
+          in: body
+          type: string
+          schema: 
+            $ref: '#/definitions/SetPasswordForm'
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/writeOpinion:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 填写意见反馈
+      produces:
+        - application/json
+      parameters:
+        - name: cotent
+          description: 意见反馈（含标点500字以内）
+          in: query
+          type: string
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getMsgList:
+    get: 
+      tags: 
+        - 用户中心
+      summary: 获取通知消息列表
+      produces:
+        - application/json
+      parameters:
+        - name: isRead
+          description: 是否已读（0未读1已读，不填为全部）
+          in: query
+          type: integer
+        - name: msgType
+          description: 消息类型（0系统消息1活动消息，不填为全部）
+          in: query
+          type: integer
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/getMsgDetail:
+    get: 
+      tags: 
+        - 用户中心
+      summary: 获取通知消息详情
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: 通知消息id
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/setMsgIsRead:
+    post: 
+      tags: 
+        - 用户中心
+      summary: 设置通知消息已读
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          description: 通知消息id
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema: '#/definitions/R'
+          
+  /app/newlist:
+    get:
+      tags:
+        - 新闻中心
+      summary:  获取新闻列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+          
+  /app/newinfo:
+    get:
+      tags:
+        - 新闻中心
+      summary:  获取新闻单篇信息
+      produces:
+        - application/json
+      parameters:
+        - name: articleId
+          description: 文章ID
+          in: query
+          type: integer
+          default: 1
+          required: true
+          
+  /app/getStarList:
+    get:
+      tags:
+        - 服务星和金钥匙
+      summary:  获取服务星或金钥匙列表
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          description: 当前页
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: limit
+          description: 每页条数
+          in: query
+          type: integer
+          default: 10
+          required: true
+        - name: starClass
+          description: 分类ID 1.前台 2.客房 3.餐饮 4.财务 5.接待
+          in: query
+          type: integer
+          default: 1
+          required: true
+        - name: type
+          description: 类型 1.服务星 2.金钥匙
+          in: query
+          type: integer
+          default: 1
+          required: true
+  
+  /app/getStarInfo:
+    get:
+      tags:
+        - 服务星和金钥匙
+      summary:  获取服务星或金钥匙详情含评论
+      produces:
+        - application/json
+      parameters:
+        - name: starId
+          description: 服务星ID或金钥匙ID
+          in: query
+          type: integer
+          default: 1
+          required: true
+          
+  /app/chooseKey:
+    post:
+      tags:
+        - 服务星和金钥匙
+      summary: 选择/绑定金钥匙
+      produces:
+        - application/json
+      parameters:
+        - name: starId
+          description: 服务星ID或金钥匙ID
+          in: query
+          type: integer
+          required: true
+          
+  /app/hasKeyCommentPermission:
+    get:
+      tags:
+        - 服务星和金钥匙
+      summary: 判断是否有权限评价该金钥匙
+      produces:
+        - application/json
+      parameters:
+        - name: starId
+          description: 服务星ID或金钥匙ID
+          in: query
+          type: integer
+          required: true
+          
+  /app/getStarClassName:
+    get:
+      tags:
+        - 服务星和金钥匙
+      summary:  获取服务星所有分类
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+          
+  /app/commentStar:
+    post:
+      tags:
+        - 服务星和金钥匙
+      summary: 评论服务星或金钥匙
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: JSON对象
+          in: body
+          type: string
+          schema:
+            $ref: '#/definitions/CommentStarForm'
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+            
+  /app/login:
+    post:
+      tags:
+        - 用户登录
+      summary: 用户登录
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: 管理员对象
+          in: body
+          type: string
+          schema:
+            $ref: '#/definitions/LoginAppForm'
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Login'
+            
+  /app/getImgCode:
+    get:
+      tags:
+        - 用户注册
+      summary: 获取图片验证码
+      produces:
+        - application/json
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/CodeForm'
+            
+  /app/sendMsg:
+    post:
+      tags:
+        - 用户注册
+      summary: 验证码发送
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: 管理员对象
+          in: body
+          type: string
+          schema:
+            $ref: '#/definitions/CodeAppForm'
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/CodeForm'
+            
+  /app/userAgreement:
+    get:
+      tags:
+        - 用户注册
+      summary: 获取协议文档
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          description: 文档类型
+          in: query
+          type: integer
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/R'
+            
+  /app/validateNum:
+    post:
+      tags:
+        - 用户注册
+      summary: 验证码验证 注册 找回密码
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          description: 管理员对象
+          in: body
+          type: string
+          schema:
+            $ref: '#/definitions/ValidateNumForm'
+          required: true
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Login'
+
+  
+  
+definitions:
+  R:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      msg:
+        description: 失败原因
+        type: string
+  UserId:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      msg:
+        description: 失败原因
+        type: string
+      userId:
+        description: 用户id
+        type: long
+  UserInfo:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      msg:
+        description: 失败原因
+        type: string
+      user:
+        type: 'object description:用户信息 type:long'
+  Login:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      token:
+        description: token
+        type: string
+      expire:
+        description: 过期时长
+        type: integer
+        format: int32
+      msg:
+        description: 失败原因
+        type: string
+  CodeForm:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      tamp:
+        description: 时间戳
+        type: string
+      hash:
+        description: Hash值
+        type: string
+      msg:
+        description: 失败原因
+        type: string
+        
+  AddCartForm:
+    type: object
+    properties:
+      goodsId:
+        description: 商品ID
+        type: integer
+      goodsName:
+        description: 商品名称
+        type: string
+      count:
+        description: 购买数量
+        type: integer
+      price:
+        description: 商品价格
+        type: bigdecimal
+      goodsAttributeId:
+        description: 商品属性ID(详情接口的对应商品用户选择的attrValueId)
+        type: integer
+      pictureId:
+        description: 商品图片ID
+        type: integer
+      type:
+        description: 类型 0 是普通商品购物车  1 是酒店类型购物车
+        type: integer
+      intoStore:
+        description: 住店日期 10位数 时间戳（秒）
+        type: integer 
+      leaveStore:
+        description: 离店日期 10位数 时间戳（秒）
+        type: integer
+      maxUsePoint:
+        description: 酒店房价最大可用抵扣积分数
+        type: integer
+        
+  MemberExpressAddressEntity:
+    type: object
+    properties:
+      id:
+        description: 收货地址ID
+        type: string
+        
+  PaymentPassword: 
+    type: object
+    properties:
+      lastPwd:
+        description: 原始密码
+        type: string
+      newPwd:
+        description: 新密码
+        type: string
+        
+  UpdatePaymentPassword:
+    type: object
+    properties:
+      lastPassword:
+        description: 旧支付密码
+        type: string
+      newPassword:
+        description: 新支付密码
+        
+        
+  OperationAddressForm:
+    type: object
+    properties:
+      id:
+        description: 地址ID（更新时用，新增请删除此字段）
+        type: integer
+      consigner:
+        description: 收件人
+        type: string
+      mobile:
+        description: 电话
+        type: string
+      province:
+        description: 省ID
+        type: integer
+      city: 
+        description: 城市ID
+        type: integer
+      district:
+        description: 区域ID
+        type: integer
+      address:
+        description: 详细地址
+        type: string 
+      isDefault:
+        description: 是否默认地址0否1是
+        type: integer 
+      recvTimeRange:
+        description: 收件时间区间（0：不限，1：8-10，2：10-12，3：12-14，4：14-16，5：16-18，6：18-20）
+        type: integer 
+      
+  ValidateNumForm:
+    type: object
+    properties:
+      mobile:
+        description: 手机号
+        type: string
+      msgNum:
+        description: 验证码
+        type: string
+      tamp:
+        description: 获取验证码时返回的时间戳
+        type: string
+      hash:
+        description: 获取验证码返回的hash
+        type: string
+      password:
+        description: 自定义密码
+        type: string
+      promoter:
+        description: 推广人ID
+        type: string
+      type:
+        description: 0注册1密码找回
+        type: integer
+      birthDate:
+        description: 生日（yyyy-MM-dd）
+        type: string
+  PointExchangeForm:
+    type: object
+    properties:
+      pointNum:
+        description: 兑换积分数量
+        type: integer
+        default: 10
+  LoginForm:
+    type: object
+    properties:
+      username:
+        description: 用户名
+        type: string
+      password:
+        description: 密码
+        type: string
+      captcha:
+        description: 验证码
+        type: string
+      uuid:
+        description: UUID
+        type: string
+  AddPartnerForm:
+    type: object
+    properties:
+      userTel:
+        description: 联系方式
+        type: string
+      realName:
+        description: 真实姓名
+        type: string
+      cardFront:
+        description: 身份证正面
+        type: integer
+      cardReverse:
+        description: 身份证反面
+        type: integer
+        
+  SetPasswordForm:
+    type: object
+    properties:
+      lastPassword:
+        description: 旧密码
+        type: string
+      newPassword:
+        description: 新密码
+        type: string
+        
+  AddOrUpdateBankAccountForm:
+    type: object
+    properties:
+      accountType:
+        description: 账户类型 1 银行卡 2 微信 3 支付宝
+        type: integer
+      realname:
+        description: 真实姓名
+        type: string
+      accountNumber:
+        description: 账号
+        type: string
+      id:
+        description: 账户ID
+        type: integer
+        
+  CommentStarForm:
+    type: object
+    properties:
+      type:
+        description: 评论类型 1.服务星 2.金钥匙
+        type: integer
+        default: 1
+      starId:
+        description: 服务星ID或金钥匙ID
+        type: integer
+        default: 1
+      content:
+        description: 评论内容
+        type: string
+      point:
+        description: 评论评分(1.0-5.0)
+        type: double
+        default: 1.0
+      orderId:
+        description: 面向该金钥匙评论对应的订单ID(评论类型为金钥匙时必填)
+        type: integer
+        
+  EmbodyForm:
+    type: object
+    properties:
+      cash:
+        description: 提现金额
+        type: bigdecimal
+        default: 1.00
+      memberBankAccountId: 
+        description: 提现账户ID
+        type: integer
+      
+  LoginAppForm:
+    type: object
+    properties:
+      mobile:
+        description: 手机号
+        type: string
+        default: 13677375913
+      password:
+        description: 密码
+        type: string
+        default: program
+  CodeAppForm:
+    type: object
+    properties:
+      mobile:
+        description: 手机号
+        type: string
+      imgCode:
+        description: 图片验证码
+        type: string
+      sendType:
+        description: 发送方式0注册验证码1支付密码找回验证码
+        type: string
+  PasswordForm:
+    type: object
+    properties:
+      password:
+        description: 原密码
+        type: string
+      newPassword:
+        description: 新密码
+        type: string
+        
+  OrderForm:
+    type: object
+    properties:
+      generateOrderGoodsEntities:
+        description: 订单商品列表
+        type: array
+        items:
+              $ref: '#/definitions/GenerateOrderGoodsEntity'
+      orderType:
+        description: 订单类型
+        type: integer
+      recieverAddressId:
+        description: 订单收货地址ID
+        type: integer
+      buyerMsg:
+        description: 买家留言
+        type: string
+      liveIn:
+        description: 入住时间（yyyy-MM-dd）
+        type: string
+      leaveOut:
+        description: 离店时间（yyyy-MM-dd）
+        type: string
+      buyerInvoice:
+        description: 买家发票ID
+        type: string
+      receiverName:
+        description: 住客姓名
+        type: string
+      receiverMobile:
+        description: 住客联系方式
+        type: string
+      keyId:
+        description: 金钥匙ID
+        type: integer
+        
+  InvoiceForm:
+    type: object
+    properties:
+      invoiceId:
+        description: 发票ID（0为新增发票）
+        type: integer
+      isCpmpany:
+        description: 是否公司发票0公司1个人
+        type: integer
+      invoiceType:
+        description: 发票类型0增值税普票1增值税专票
+        type: integer
+      companyName:
+        description: 企业名称（个人发票时为开票人姓名）
+        type: string
+      taxpayerCode:
+        description: 纳税人识别编号
+        type: string
+      socialCreditCode:
+        description: 统一社会信用代码
+        type: string
+      companyAddress:
+        description: 公司注册地址
+        type: string
+      telNum:
+        description: 联系电话
+        type: string
+      bank:
+        description: 对外付款开户行
+        type: string
+      bankAccount:
+        description: 对外付款银行账号
+        type: string
+        
+  PayForm:
+    type: object
+    properties:
+      orderId:
+        description: 订单ID
+        type: integer
+      payPwd:
+        description: 支付密码
+        type: string
+      usePoint:
+        description: 使用抵扣积分数
+        type: string
+        
+  SysUserEntity:
+    type: object
+    properties:
+      userHeadimg:
+        description: 用户头像
+        type: integer
+      nickName:
+        description: 用户昵称
+        type: string
+      sex:
+        description: 用户性别 1 男 2 女
+        type: string
+      
+  SysUserEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/SysUserEntity'
+  GenerateOrderGoodsEntity:
+    type: object
+    properties:
+      goodsId:
+        description: 商品ID
+        type: integer
+        format: int32
+      skuId:
+        description: 商品属性ID
+        type: integer
+        format: int32
+      count:
+        description: 购买数量
+        type: integer
+        format: int32
+  SysUserEntityEdit:
+    type: object
+    properties:
+      userId:
+        description: 用户ID
+        type: integer
+        format: int64
+      username:
+        description: 用户名
+        type: string
+      password:
+        description: 密码
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      mobile:
+        description: 手机号
+        type: string
+      status:
+        description: 状态  0：禁用   1：正常
+        type: integer
+        format: int32
+      roleIdList:
+        description: 角色ID列表
+        type: array
+        items:
+          type: integer
+          format: int32
+  SysRoleEntity:
+    type: object
+    properties:
+      roleId:
+        description: 角色ID
+        type: integer
+        format: int64
+      roleName:
+        description: 角色名称
+        type: string
+      remark:
+        description: 备注
+        type: string
+      menuIdList:
+        description: 菜单ID列表
+        type: array
+        items:
+          type: integer
+          format: int64
+      createUserId:
+        description: 创建者ID
+        type: integer
+        format: int64
+      createTime:
+        description: 创建时间
+        type: string
+        format: date-time
+  SysRoleEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/SysRoleEntity'
+  SysRoleEntityEdit:
+    type: object
+    properties:
+      roleId:
+        description: 角色ID
+        type: integer
+        format: int64
+      roleName:
+        description: 角色名称
+        type: string
+      remark:
+        description: 备注
+        type: string
+      menuIdList:
+        description: 菜单ID列表
+        type: array
+        items:
+          type: integer
+          format: int64
+  SysMenuEntity:
+    type: object
+    properties:
+      menuId:
+        description: 菜单ID
+        type: integer
+        format: int64
+      name:
+        description: 菜单名称
+        type: string
+      parentId:
+        description: 父菜单ID，一级菜单为0
+        type: integer
+        format: int64
+      parentName:
+        description: 父菜单名称
+        type: string
+      url:
+        description: 菜单URL
+        type: string
+      perms:
+        description: 授权标识
+        type: string
+      type:
+        description: 类型     0：目录   1：菜单   2：按钮
+        type: integer
+        format: int32
+      icon:
+        description: 菜单图标
+        type: string
+      orderNum:
+        description: 排序
+        type: integer
+        format: int32
+      open:
+        description: 是否展开   true：展开   false：不展开
+        type: boolean
+        format: int32
+  SysMenuEntityEdit:
+    type: object
+    properties:
+      menuId:
+        description: 菜单ID
+        type: integer
+        format: int64
+      name:
+        description: 菜单名称
+        type: string
+      parentId:
+        description: 父菜单ID，一级菜单为0
+        type: integer
+        format: int64
+      url:
+        description: 菜单URL
+        type: string
+      perms:
+        description: 授权标识
+        type: string
+      type:
+        description: 类型     0：目录   1：菜单   2：按钮
+        type: integer
+        format: int32
+      icon:
+        description: 菜单图标
+        type: string
+      orderNum:
+        description: 排序
+        type: integer
+        format: int32
+  SysLogEntity:
+    type: object
+    properties:
+      id:
+        description: 日志ID
+        type: integer
+        format: int64
+      username:
+        description: 用户名
+        type: string
+      operation:
+        description: 用户操作
+        type: string
+      method:
+        description: 请求方法
+        type: string
+      params:
+        description: 请求参数
+        type: string
+      time:
+        description: 执行时长(毫秒)
+        type: integer
+        format: int64
+      ip:
+        description: IP地址
+        type: string
+      createTime:
+        description: 创建时间
+        type: string
+        format: date-time
+  SysLogEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/SysLogEntity'
+  SysConfigEntity:
+    type: object
+    properties:
+      id:
+        description: 参数ID
+        type: integer
+        format: int64
+      key:
+        description: 参数名
+        type: string
+      value:
+        description: 参数值
+        type: string
+      remark:
+        description: 备注
+        type: string
+  SysConfigEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/SysConfigEntity'
+  SysOssEntity:
+    type: object
+    properties:
+      id:
+        description: ID
+        type: integer
+        format: int64
+      url:
+        description: URL地址
+        type: string
+      createTime:
+        description: 创建时间
+        type: string
+        format: date-time
+  SysOssEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/SysOssEntity'
+  SysCloudStorageEntity:
+    type: object
+    properties:
+      type:
+        description: 类型 1：七牛  2：阿里云  3：腾讯云
+        type: integer
+        format: int32
+      qiniuDomain:
+        description: 七牛绑定的域名
+        type: string
+      qiniuPrefix:
+        description: 七牛路径前缀
+        type: string
+      qiniuAccessKey:
+        description: 七牛ACCESS_KEY
+        type: string
+      qiniuSecretKey:
+        description: 七牛SECRET_KEY
+        type: string
+      qiniuBucketName:
+        description: 七牛存储空间名
+        type: string
+      aliyunDomain:
+        description: 阿里云绑定的域名
+        type: string
+      aliyunPrefix:
+        description: 阿里云路径前缀
+        type: string
+      aliyunEndPoint:
+        description: 阿里云EndPoint
+        type: string
+      aliyunAccessKeyId:
+        description: 阿里云AccessKeyId
+        type: string
+      aliyunAccessKeySecret:
+        description: 阿里云AccessKeySecret
+        type: string
+      aliyunBucketName:
+        description: 阿里云BucketName
+        type: string
+      qcloudDomain:
+        description: 腾讯云绑定的域名
+        type: string
+      qcloudPrefix:
+        description: 腾讯云路径前缀
+        type: string
+      qcloudAppId:
+        description: 腾讯云AppId
+        type: string
+      qcloudSecretId:
+        description: 腾讯云SecretId
+        type: string
+      qcloudSecretKey:
+        description: 腾讯云SecretKey
+        type: string
+      qcloudBucketName:
+        description: 腾讯云BucketName
+        type: string
+      qcloudRegion:
+        description: 腾讯云COS所属地区
+        type: string
+  FileUpload:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      url:
+        description: 文件URL地址
+        type: string
+      msg:
+        description: 失败原因
+        type: string
+  ScheduleJobEntity:
+    type: object
+    properties:
+      jobId:
+        description: 任务ID
+        type: integer
+        format: int64
+      beanName:
+        description: spring bean名称
+        type: string
+      methodName:
+        description: 方法名
+        type: string
+      params:
+        description: 参数
+        type: string
+      cronExpression:
+        description: cron表达式
+        type: string
+      status:
+        description: 任务状态  0：正常  1：暂停
+        type: integer
+        format: int32
+      remark:
+        description: 备注
+        type: string
+      createTime:
+        description: 创建时间
+        type: string
+        format: date-time
+  ScheduleJobEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/ScheduleJobEntity'
+  ScheduleJobLogEntity:
+    type: object
+    properties:
+      logId:
+        description: 日志id
+        type: integer
+        format: int64
+      jobId:
+        description: 任务id
+        type: integer
+        format: int64
+      beanName:
+        description: spring bean名称
+        type: string
+      methodName:
+        description: 方法名
+        type: string
+      params:
+        description: 参数
+        type: string
+      status:
+        description: 任务状态    0：成功    1：失败
+        type: integer
+        format: int32
+      error:
+        description: 失败信息
+        type: string
+      times:
+        description: 耗时(单位：毫秒)
+        type: integer
+        format: int32
+      createTime:
+        description: 创建时间
+        type: string
+        format: date-time
+  ScheduleJobLogEntityList:
+    type: object
+    properties:
+      code:
+        description: 状态码 0：成功  非0：失败
+        type: integer
+        format: int32
+      page:
+        type: object
+        properties:
+          totalCount:
+            description: 总记录数
+            type: integer
+            format: int32
+          pageSize:
+            description: 每页记录数
+            type: integer
+            format: int32
+          totalPage:
+            description: 总页数
+            type: integer
+            format: int32
+          currPage:
+            description: 当前页数
+            type: integer
+            format: int32
+          list:
+            type: array
+            items:
+              $ref: '#/definitions/ScheduleJobLogEntity'

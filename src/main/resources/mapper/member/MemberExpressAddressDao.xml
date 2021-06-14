@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.member.dao.MemberExpressAddressDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.member.entity.MemberExpressAddressEntity" id="memberExpressAddressMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="consigner" column="consigner"/>
+        <result property="mobile" column="mobile"/>
+        <result property="phone" column="phone"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="district" column="district"/>
+        <result property="address" column="address"/>
+        <result property="zipCode" column="zip_code"/>
+        <result property="alias" column="alias"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="recvTimeRange" column="recv_time_range"/>
+    </resultMap>
+
+	<update id="updateIsDefault" parameterType="java.util.Map">
+		UPDATE ns_member_express_address
+		SET is_default = 0
+		WHERE
+			1 = 1
+		<if test="uid !=null and uid !=''">
+			AND uid = #{uid} 
+		</if>
+	</update>
+
+</mapper>

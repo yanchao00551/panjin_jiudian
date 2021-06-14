@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.rewardRecord.dao.RewardRecordDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.rewardRecord.entity.RewardRecordEntity" id="rewardRecordMap">
+        <result property="rewardId" column="reward_id"/>
+        <result property="fromUid" column="from_uid"/>
+        <result property="toUid" column="to_uid"/>
+        <result property="value" column="value"/>
+    </resultMap>
+	
+	<select id="querySumGroupByFromUid" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.rewardRecord.entity.RewardRecordEntity">
+		SELECT
+			reward_id,
+			from_uid,
+			to_uid,
+			sum(VALUE) AS reward
+		FROM
+			ns_reward_record
+		WHERE
+			1 = 1
+		<if test="toUid !=null and toUid !=''">
+			AND to_uid = #{toUid} 
+		</if>
+		<if test="fromUid !=null and fromUid !=''">
+			AND from_uid = #{fromUid} 
+		</if>
+		GROUP BY
+			from_uid
+	</select>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.OrderPresellDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.OrderPresellEntity" id="orderPresellMap">
+        <result property="presellOrderId" column="presell_order_id"/>
+        <result property="outTradeNo" column="out_trade_no"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="operatorType" column="operator_type"/>
+        <result property="operatorId" column="operator_id"/>
+        <result property="relateId" column="relate_id"/>
+        <result property="presellTime" column="presell_time"/>
+        <result property="presellMoney" column="presell_money"/>
+        <result property="presellPay" column="presell_pay"/>
+        <result property="platformMoney" column="platform_money"/>
+        <result property="point" column="point"/>
+        <result property="pointMoney" column="point_money"/>
+        <result property="presellPrice" column="presell_price"/>
+        <result property="presellDeliveryType" column="presell_delivery_type"/>
+        <result property="presellDeliveryValue" column="presell_delivery_value"/>
+        <result property="presellDeliveryTime" column="presell_delivery_time"/>
+        <result property="isFullPayment" column="is_full_payment"/>
+    </resultMap>
+
+
+</mapper>

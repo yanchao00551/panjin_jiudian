@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.star.dao.StarDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.star.entity.StarEntity" id="starMap">
+        <result property="starId" column="star_id"/>
+        <result property="starName" column="star_name"/>
+        <result property="grade" column="grade"/>
+        <result property="starClass" column="star_class"/>
+        <result property="createDate" column="create_date"/>
+        <result property="telNum" column="tel_num"/>
+    </resultMap>
+
+	<select id="queryStarAndAvg" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.star.entity.StarEntity">
+		SELECT
+			ns.star_id,
+			ns.star_name,
+			ns.star_class,
+			ns.banner,
+			ns.content,
+			ns.type,
+			ns.create_date,
+			ns.tel_num,
+			ns.link_url,
+			t.avgPoint
+		FROM
+			ns_star ns
+		LEFT JOIN (
+			SELECT
+				nsc.star_id,
+				AVG(nsc.point) AS avgPoint
+			FROM
+				ns_star_comment nsc
+			GROUP BY
+				nsc.star_id
+		) t ON ns.star_id = t.star_id
+		WHERE
+			1 = 1
+		<if test="type != null and type !=''">
+			AND ns.type = #{type}
+			<if test="type == 1 and starClass != null and starClass !=''">
+				AND ns.star_class = #{starClass}
+			</if>
+		</if>
+		<if test="starId != null and starId !=''">
+			AND ns.star_id = #{starId}
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.weixin.dao.SysWeixinQrcodeTemplateDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.weixin.entity.SysWeixinQrcodeTemplateEntity" id="sysWeixinQrcodeTemplateMap">
+        <result property="id" column="id"/>
+        <result property="instanceId" column="instance_id"/>
+        <result property="background" column="background"/>
+        <result property="nickFontColor" column="nick_font_color"/>
+        <result property="nickFontSize" column="nick_font_size"/>
+        <result property="isLogoShow" column="is_logo_show"/>
+        <result property="headerLeft" column="header_left"/>
+        <result property="headerTop" column="header_top"/>
+        <result property="nameLeft" column="name_left"/>
+        <result property="nameTop" column="name_top"/>
+        <result property="logoLeft" column="logo_left"/>
+        <result property="logoTop" column="logo_top"/>
+        <result property="codeLeft" column="code_left"/>
+        <result property="codeTop" column="code_top"/>
+        <result property="isCheck" column="is_check"/>
+        <result property="isRemove" column="is_remove"/>
+        <result property="templateUrl" column="template_url"/>
+    </resultMap>
+
+
+</mapper>

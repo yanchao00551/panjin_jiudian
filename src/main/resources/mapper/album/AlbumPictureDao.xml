@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.album.dao.AlbumPictureDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.album.entity.AlbumPictureEntity" id="albumPictureMap">
+        <result property="picId" column="pic_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="albumId" column="album_id"/>
+        <result property="isWide" column="is_wide"/>
+        <result property="picName" column="pic_name"/>
+        <result property="picTag" column="pic_tag"/>
+        <result property="picCover" column="pic_cover"/>
+        <result property="picSize" column="pic_size"/>
+        <result property="picSpec" column="pic_spec"/>
+        <result property="picCoverBig" column="pic_cover_big"/>
+        <result property="picSizeBig" column="pic_size_big"/>
+        <result property="picSpecBig" column="pic_spec_big"/>
+        <result property="picCoverMid" column="pic_cover_mid"/>
+        <result property="picSizeMid" column="pic_size_mid"/>
+        <result property="picSpecMid" column="pic_spec_mid"/>
+        <result property="picCoverSmall" column="pic_cover_small"/>
+        <result property="picSizeSmall" column="pic_size_small"/>
+        <result property="picSpecSmall" column="pic_spec_small"/>
+        <result property="picCoverMicro" column="pic_cover_micro"/>
+        <result property="picSizeMicro" column="pic_size_micro"/>
+        <result property="picSpecMicro" column="pic_spec_micro"/>
+        <result property="uploadTime" column="upload_time"/>
+        <result property="uploadType" column="upload_type"/>
+        <result property="domain" column="domain"/>
+        <result property="bucket" column="bucket"/>
+    </resultMap>
+
+
+</mapper>

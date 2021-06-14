@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.O2oOrderDeliveryDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.O2oOrderDeliveryEntity" id="o2oOrderDeliveryMap">
+        <result property="id" column="id"/>
+        <result property="expressNo" column="express_no"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderDeliveryUserId" column="order_delivery_user_id"/>
+        <result property="orderDeliveryUserName" column="order_delivery_user_name"/>
+        <result property="orderDeliveryUserMobile" column="order_delivery_user_mobile"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+</mapper>

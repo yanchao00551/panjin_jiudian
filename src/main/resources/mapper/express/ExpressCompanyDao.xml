@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.express.dao.ExpressCompanyDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.express.entity.ExpressCompanyEntity" id="expressCompanyMap">
+        <result property="coId" column="co_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="expressNo" column="express_no"/>
+        <result property="isEnabled" column="is_enabled"/>
+        <result property="image" column="image"/>
+        <result property="phone" column="phone"/>
+        <result property="orders" column="orders"/>
+        <result property="expressLogo" column="express_logo"/>
+        <result property="isDefault" column="is_default"/>
+    </resultMap>
+
+
+</mapper>

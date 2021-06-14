@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.star.dao.StarCommentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.star.entity.StarCommentEntity" id="starCommentMap">
+        <result property="id" column="id"/>
+        <result property="starId" column="star_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="content" column="content"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+    <!-- 查询详情的评论列表 -->
+	<select id="queryStarComment"  parameterType="java.util.Map" resultType="com.jiudian.modules.star.entity.StarCommentEntity">
+		SELECT
+			id,
+			near.star_id,
+			near.user_id,
+			near.content,
+			near.type,
+			near.create_date,
+			near.point,
+			p.pic_cover_micro,
+			m.nick_name,
+			m.username
+		FROM
+			ns_star_comment AS near
+		LEFT JOIN tb_user AS m ON near.user_id = m.user_id
+		LEFT JOIN sys_album_picture AS p ON p.pic_id = m.user_headimg
+		WHERE
+			1 = 1
+		<if test="type != null and type !=''">
+			AND near.type = #{type}
+		</if>
+		
+		<if test="starId != null and starId !=''">
+			AND near.star_id = #{starId}
+		</if>
+		ORDER BY
+			near.create_date DESC
+	</select>
+	
+
+</mapper>

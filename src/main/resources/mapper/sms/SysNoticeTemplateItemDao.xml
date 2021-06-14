@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.sms.dao.SysNoticeTemplateItemDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.sms.entity.SysNoticeTemplateItemEntity" id="sysNoticeTemplateItemMap">
+        <result property="id" column="id"/>
+        <result property="itemName" column="item_name"/>
+        <result property="showName" column="show_name"/>
+        <result property="replaceName" column="replace_name"/>
+        <result property="typeIds" column="type_ids"/>
+        <result property="order" column="order"/>
+    </resultMap>
+    
+    <select id="queryByTemplateCodeInfo" resultType="com.jiudian.modules.sms.entity.SysNoticeTemplateItemEntity">
+		select * from sys_notice_template_item where FIND_IN_SET(#{templateCode},type_ids)
+	</select>
+
+
+</mapper>

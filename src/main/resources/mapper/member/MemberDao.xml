@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.member.dao.MemberDao">
+
+
+	<!-- 发布单列表 条件查询 -->
+	<select id="queryByUserList"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+		SELECT
+		a.*,
+		b.*,
+		c.*,
+		d.*,
+		q.username as q_username,q.nick_name as q_nickname
+		FROM ns_member as a 
+		LEFT JOIN ns_member_account as b on a.uid = b.uid 
+		LEFT JOIN tb_user as c on a.uid = c.user_id
+		LEFT JOIN ns_member_level as d on a.member_level = d.level_id
+		LEFT JOIN (select o.username,p.uid,r.nick_name  from tb_user as o LEFT JOIN ns_member as p on o.user_id = p.pid LEFT JOIN tb_user as r on r.user_id = p.uid) as q ON q.uid = a.uid
+		WHERE 1=1
+		<if test="username != null and username !=''">
+			AND a.member_name LIKE '%${username}%'
+		</if>
+		<if test="uid != null and uid !=''">
+		    AND a.uid = #{uid}
+		</if>
+		ORDER BY a.reg_time
+		DESC
+	</select>
+	
+	
+	<!-- 单个会员详情查询 -->
+	<select id="queryByUserDetail"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+		SELECT
+		a.*,
+		b.*,
+		c.*,
+		d.*,
+		q.username as q_username,q.nick_name as q_nickname,
+		f.status as partner_status
+		FROM ns_member as a 
+		LEFT JOIN ns_member_account as b on a.uid = b.uid 
+		LEFT JOIN tb_user as c on a.uid = c.user_id
+		LEFT JOIN ns_member_level as d on a.member_level = d.level_id
+		LEFT JOIN (
+			SELECT
+				o.username,
+				p.uid,
+				r.nick_name
+			FROM
+				tb_user AS o
+			LEFT JOIN ns_member AS p ON o.user_id = p.uid
+			LEFT JOIN tb_user AS r ON r.user_id = p.uid
+		) AS q ON q.uid = a.pid
+		LEFT JOIN (select * from ns_member_partner where status != 2) as f on a.uid = f.uid
+		WHERE 1=1
+		AND a.uid = #{uid}
+		ORDER BY a.reg_time
+		DESC
+	</select>
+	
+	<!-- 根据ID修改会员等级 -->
+	<select id="updateByUserLevel"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+		UPDATE ns_member
+		SET member_level= #{levelName}
+		WHERE 1=1
+		AND uid = #{uid}
+	</select>
+	
+	
+	    
+    <!-- 查询我的团队 三级 列表 -->
+	<select id="queryByTeamList"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+	SELECT a.member_name,a.reg_time,b.user_headimg,b.mobile,c.number FROM ns_member AS a LEFT JOIN
+	tb_user AS b ON b.user_id = a.uid LEFT JOIN
+	(SELECT uid,sum(number) AS number from ns_member_account_records WHERE 1=1 AND is_freeze = 0 AND account_type = 2 AND from_type = 12 GROUP BY uid) AS c ON c.uid = a.uid
+	WHERE 1=1 
+	AND FIND_IN_SET(a.uid, getChildLst(#{uid}))
+	ORDER BY c.number 
+	DESC
+	</select>
+	
+	<!-- 查询我的团队人数和我的业绩排名  已完成订单4 已入住状态5 只算自己购买的-->
+    <select id="queryTeamNumAmong"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+	SELECT count(*) as teamNumber,
+	(SELECT (@rowno:=@rowno+1) as among FROM (SELECT user_name,sum(goods_money) as performance 
+FROM ns_order,(select (@rowno:=0)) b WHERE 1=1 AND order_status = 4 AND shipping_status = 5 GROUP BY user_name ORDER BY performance DESC) AS c WHERE c.user_name = #{username}) 
+	as among FROM parent WHERE FIND_IN_SET(`uid`,getChildLst(#{uid}))
+	</select>
+	
+	<!-- 查询我的团队人数 -->
+    <select id="queryTeamNum"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+	SELECT count(*) as teamNumber FROM parent WHERE FIND_IN_SET(`uid`,getChildLst(#{uid}))
+	</select>
+	
+	<!-- 查询我的团队 三级内 所有成员列表 -->
+	<select id="queryAllTeamList"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+	SELECT uid,member_name FROM ns_member WHERE 1=1 AND FIND_IN_SET(`uid`,getChildLst(#{uid}))
+	</select>
+	
+	<select id="queryPartnerList"  parameterType="java.util.Map" resultType="com.jiudian.modules.member.entity.MemberEntity">
+	SELECT
+		nm.id,
+		nm.uid,
+		tu.user_headimg,
+		nmp.`status`,
+		tu.nick_name,
+		tu.mobile,
+		tu.real_name,
+		tu.reg_time,
+		tu.last_login_time,
+		nma.balance,
+		nma.point
+	FROM
+		ns_member nm
+	LEFT JOIN ns_member_partner nmp ON nm.uid = nmp.uid
+	LEFT JOIN tb_user tu ON nm.uid = tu.user_id
+	LEFT JOIN ns_member_account nma ON nm.uid = nma.uid
+	WHERE
+		nmp.`status` = 1
+		<if test="nickName !=null and nickName !=''">
+			AND tu.nick_name LIKE '%${nickName}%'
+		</if>
+		<if test="realName !=null and realName !=''">
+			AND tu.real_name LIKE '%${realName}%'
+		</if>
+		<if test="startDatetime !=null and startDatetime !=''">
+			<if test="endDatetime !=null and endDatetime !=''">
+				AND tu.reg_time BETWEEN #{startDatetime} AND #{endDatetime}
+			</if>
+		</if>
+	</select>
+	
+	
+</mapper>

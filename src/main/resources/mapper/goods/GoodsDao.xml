@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.goods.dao.GoodsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.goods.entity.GoodsEntity" id="goodsMap">
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryId1" column="category_id_1"/>
+        <result property="categoryId2" column="category_id_2"/>
+        <result property="categoryId3" column="category_id_3"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="groupIdArray" column="group_id_array"/>
+        <result property="promotionType" column="promotion_type"/>
+        <result property="promoteId" column="promote_id"/>
+        <result property="goodsType" column="goods_type"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="price" column="price"/>
+        <result property="promotionPrice" column="promotion_price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="pointExchangeType" column="point_exchange_type"/>
+        <result property="pointExchange" column="point_exchange"/>
+        <result property="givePoint" column="give_point"/>
+        <result property="isMemberDiscount" column="is_member_discount"/>
+        <result property="shippingFee" column="shipping_fee"/>
+        <result property="shippingFeeId" column="shipping_fee_id"/>
+        <result property="stock" column="stock"/>
+        <result property="maxBuy" column="max_buy"/>
+        <result property="clicks" column="clicks"/>
+        <result property="minStockAlarm" column="min_stock_alarm"/>
+        <result property="sales" column="sales"/>
+        <result property="collects" column="collects"/>
+        <result property="star" column="star"/>
+        <result property="evaluates" column="evaluates"/>
+        <result property="shares" column="shares"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="picture" column="picture"/>
+        <result property="keywords" column="keywords"/>
+        <result property="introduction" column="introduction"/>
+        <result property="description" column="description"/>
+        <result property="qrcode" column="QRcode"/>
+        <result property="code" column="code"/>
+        <result property="isStockVisible" column="is_stock_visible"/>
+        <result property="isHot" column="is_hot"/>
+        <result property="isRecommend" column="is_recommend"/>
+        <result property="isNew" column="is_new"/>
+        <result property="isPreSale" column="is_pre_sale"/>
+        <result property="isBill" column="is_bill"/>
+        <result property="state" column="state"/>
+        <result property="sort" column="sort"/>
+        <result property="imgIdArray" column="img_id_array"/>
+        <result property="skuImgArray" column="sku_img_array"/>
+        <result property="matchPoint" column="match_point"/>
+        <result property="matchRatio" column="match_ratio"/>
+        <result property="realSales" column="real_sales"/>
+        <result property="goodsAttributeId" column="goods_attribute_id"/>
+        <result property="goodsSpecFormat" column="goods_spec_format"/>
+        <result property="goodsWeight" column="goods_weight"/>
+        <result property="goodsVolume" column="goods_volume"/>
+        <result property="shippingFeeType" column="shipping_fee_type"/>
+        <result property="extendCategoryId" column="extend_category_id"/>
+        <result property="extendCategoryId1" column="extend_category_id_1"/>
+        <result property="extendCategoryId2" column="extend_category_id_2"/>
+        <result property="extendCategoryId3" column="extend_category_id_3"/>
+        <result property="supplierId" column="supplier_id"/>
+        <result property="saleDate" column="sale_date"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="minBuy" column="min_buy"/>
+        <result property="virtualGoodsTypeId" column="virtual_goods_type_id"/>
+        <result property="productionDate" column="production_date"/>
+        <result property="shelfLife" column="shelf_life"/>
+        <result property="goodsVideoAddress" column="goods_video_address"/>
+        <result property="pcCustomTemplate" column="pc_custom_template"/>
+        <result property="wapCustomTemplate" column="wap_custom_template"/>
+        <result property="maxUsePoint" column="max_use_point"/>
+        <result property="isOpenPresell" column="is_open_presell"/>
+        <result property="presellTime" column="presell_time"/>
+        <result property="presellDay" column="presell_day"/>
+        <result property="presellDeliveryType" column="presell_delivery_type"/>
+        <result property="presellPrice" column="presell_price"/>
+        <result property="goodsUnit" column="goods_unit"/>
+    </resultMap>
+    
+    <!-- 商品列表查询 -->
+	<select id="queryByGoodsList" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.goods.entity.GoodsEntity">
+		SELECT
+			ng.goods_id,
+			ng.goods_name,
+			ng.shop_id,
+			ng.category_id,
+			ng.category_id1,
+			ng.category_id2,
+			ng.category_id3,
+			ng.brand_id,
+			ng.group_id_array,
+			ng.promotion_type,
+			ng.promote_id,
+			ng.goods_type,
+			ng.market_price,
+			ng.price,
+			ng.promotion_price,
+			ng.cost_price,
+			ng.point_exchange_type,
+			ng.point_exchange,
+			ng.give_point,
+			ng.is_member_discount,
+			ng.shipping_fee,
+			ng.shipping_fee_id,
+			ng.stock,
+			ng.max_buy,
+			ng.clicks,
+			ng.min_stock_alarm,
+			ng.collects,
+			ng.star,
+			ng.evaluates,
+			ng.shares,
+			ng.province_id,
+			ng.city_id,
+			ng.picture,
+			ng.keywords,
+			ng.introduction,
+			ng.description,
+			ng.QRcode,
+			ng.CODE,
+			ng.is_stock_visible,
+			ng.is_hot,
+			ng.is_recommend,
+			ng.is_new,
+			ng.is_pre_sale,
+			ng.is_bill,
+			ng.state,
+			ng.sort,
+			ng.img_id_array,
+			ng.sku_img_array,
+			ng.match_point,
+			ng.match_ratio,
+			ng.real_sales,
+			ng.goods_attribute_id,
+			ng.goods_spec_format,
+			ng.goods_weight,
+			ng.goods_volume,
+			ng.shipping_fee_type,
+			ng.extend_category_id,
+			ng.extend_category_id1,
+			ng.extend_category_id2,
+			ng.extend_category_id3,
+			ng.supplier_id,
+			ng.sale_date,
+			ng.create_time,
+			ng.update_time,
+			ng.min_buy,
+			ng.virtual_goods_type_id,
+			ng.production_date,
+			ng.shelf_life,
+			ng.goods_video_address,
+			ng.pc_custom_template,
+			ng.wap_custom_template,
+			ng.max_use_point,
+			ng.is_open_presell,
+			ng.presell_time,
+			ng.presell_day,
+			ng.presell_delivery_type,
+			ng.presell_price,
+			ng.goods_unit,
+			ng.extends1,
+			ng.extends2,
+			ng.extends3,
+			ng_sap.pic_cover_micro,
+			CASE
+				WHEN og.soldcount IS NULL THEN
+					0
+				ELSE
+					og.soldcount
+				END AS sales,
+			CASE
+				WHEN og.soldcount IS NULL THEN
+					0
+				ELSE
+					og.soldcount
+				END AS soldcount
+		FROM
+			ns_goods AS ng
+		LEFT JOIN sys_album_picture AS ng_sap ON ng.picture = ng_sap.pic_id
+		LEFT JOIN (
+			SELECT
+				t.goods_id,
+				SUM(t.num) AS soldcount,
+				t.order_status
+			FROM
+				(
+					SELECT
+						og.goods_id,
+						o.order_status,
+						og.num
+					FROM
+						ns_order_goods og
+					LEFT JOIN ns_order o ON og.order_id = o.order_id
+				) t
+			WHERE
+				t.order_status IN (2, 3, 4)
+			GROUP BY
+				t.goods_id
+		) og ON og.goods_id = ng.goods_id
+		WHERE
+			1 = 1
+		<if test="goodsId !=null and goodsId != ''">
+		    AND ng.goods_id = #{goodsId}
+		</if>
+		<if test="goodsAttributeId !=null and goodsAttributeId != '' and goodsAttributeId != 0">
+		    AND ng.goods_attribute_id = #{goodsAttributeId}
+		</if>
+		<if test="goodsAttributeId !=null and goodsAttributeId != '' and goodsAttributeId == 0">
+		    AND ng.goods_attribute_id != 1
+		</if>
+		<if test="goodsAttributeIdAll !=null and goodsAttributeIdAll != ''">
+		    AND ng.goods_attribute_id != #{goodsAttributeIdAll}
+		</if>
+		<if test="goodsType != null and goodsType !=''">
+			AND ng.goods_type = #{goodsType}
+		</if>
+		
+		<if test="goodsName != null and goodsName !=''">
+			AND ng.goods_name LIKE '%${goodsName}%'
+		</if>
+		
+		<if test="code != null and code != ''">
+		    AND ng.code LIKE '%${code}%'
+		</if>
+		
+		<if test="categoryId != null and categoryId != ''">
+		    AND ng.category_id = #{categoryId}
+		</if>
+		
+		<if test="categoryId1 != null and categoryId1 != ''">
+		    AND ng.category_id1 = #{categoryId1}
+		</if>
+		
+		<if test="categoryId2 != null and categoryId2 != ''">
+		    AND ng.category_id2 = #{categoryId2}
+		</if>
+		
+		<if test="categoryId3 != null and categoryId3 != ''">
+		    AND ng.category_id3 = #{categoryId3}
+		</if>
+		
+		<if test="supplierId != null and supplierId != ''">
+		    AND ng.supplier_id = #{supplierId}
+		</if>
+		
+		<if test="shopId != null and shopId != ''">
+		    AND ng.shop_id = #{shopId}
+		</if>
+		
+		<if test="stockWraning != null and stockWraning != ''">
+		    AND ng.min_stock_alarm != 0 AND ng.min_stock_alarm >= ng.stock
+		</if>
+		
+		<if test="startDatetime !=null and startDatetime !=''">
+		  <if test="endDatetime !=null and endDatetime !=''">
+			AND ng.create_time BETWEEN #{startDatetime} AND #{endDatetime}
+		  </if>
+		</if>
+		
+		<if test="stateType !=null and stateType=stateType !=''">
+			AND ng.state=#{state}
+		</if>
+		
+		<if test="isRecommend !=null and isRecommend !=''">
+			AND ng.is_recommend=#{isRecommend}
+		</if>
+		
+		<if test="selectGoodsLableId !=null and selectGoodsLableId != ''">
+		    AND FIND_IN_SET(#{selectGoodsLableId},ng.group_id_array)
+		</if>
+		
+		<if test="orderPrice != null and orderPrice != '' and orderPrice == 0">
+		    ORDER BY ng.price ASC
+		</if>
+		
+		<if test="orderPrice != null and orderPrice != '' and orderPrice == 1">
+		    ORDER BY ng.price DESC
+		</if>
+		
+		<if test="orderStock != null and orderStock != '' and orderStock == 0">
+		    ORDER BY ng.stock ASC
+		</if>
+		
+		<if test="orderStock != null and orderStock != '' and orderStock == 1">
+		    ORDER BY ng.stock DESC
+		</if>
+		
+		<if test="orderSales != null and orderSales != '' and orderSales == 0">
+		    ORDER BY sales ASC
+		</if>
+		
+		<if test="orderSales != null and orderSales != '' and orderSales == 1">
+		    ORDER BY sales DESC
+		</if>
+		
+		<if test="orderSort != null and orderSort != '' and orderSort == 0">
+		    ORDER BY ng.sort ASC
+		</if>
+		
+		<if test="orderSort != null and orderSort != '' and orderSort == 1">
+		    ORDER BY ng.sort DESC
+		</if>
+		
+		<if test="orderCreateTime != null and orderCreateTime != '' and orderCreateTime == 0">
+		    ORDER BY ng.create_time ASC
+		</if>
+		
+		<if test="orderCreateTime != null and orderCreateTime != '' and orderCreateTime == 0">
+		    ORDER BY ng.create_time DESC
+		</if>
+		
+	</select>
+	
+	<select id="queryGoodsListCanSort" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.goods.entity.GoodsEntity">
+		SELECT
+			g.*, s.soldcount,
+			b.avgPoint
+		FROM
+			ns_goods g
+		LEFT JOIN (
+			SELECT
+				t.goods_id,
+				SUM(t.num) AS soldcount,
+				t.order_status
+			FROM
+				(
+					SELECT
+						og.goods_id,
+						o.order_status,
+						og.num
+					FROM
+						ns_order_goods og
+					LEFT JOIN ns_order o ON og.order_id = o.order_id
+				) t
+			WHERE
+				t.order_status IN (2, 3, 4)
+			GROUP BY
+				t.goods_id
+		) s ON g.goods_id = s.goods_id
+		LEFT JOIN (
+			SELECT
+				gc.goods_id,
+				AVG(gc.point) AS avgPoint
+			FROM
+				ns_goods_comment gc
+			WHERE
+				gc.review_status = 2
+			GROUP BY
+				gc.goods_id
+		) b ON g.goods_id = b.goods_id
+		WHERE 1=1 AND g.state = 1
+		<if test="goodsAttributeId !=null and goodsAttributeId !='' and goodsAttributeId == 1">
+			AND g.goods_attribute_id = #{goodsAttributeId} 
+		</if>
+		<if test="categoryId !=null and categoryId !=''">
+			AND g.category_id = #{categoryId} 
+		</if>
+		<if test="goodsName !=null and goodsName !=''">
+			AND g.goods_name LIKE '%${goodsName}%'
+		</if>
+		<if test="goodsAttributeId !=null and goodsAttributeId !='' and goodsAttributeId == 2">
+			AND g.goods_attribute_id != 1 
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 1">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    g.sort is null,
+			</if>
+			g.sort 
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 2">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    s.soldcount is null,
+			</if>
+			s.soldcount 
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 3">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    b.avgPoint is null,
+			</if>
+			b.avgPoint
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 4">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    g.price is null,
+			</if>
+			g.price
+		</if>
+		<if test="orderSection != null and orderSection != '' and orderSection == 0">
+		    ASC,
+		</if>
+		<if test="orderSection != null and orderSection != '' and orderSection == 1">
+		    DESC,
+		</if>
+		g.create_time
+	</select>
+    
+    <select id="queryGoodsSoldCount" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.goods.entity.GoodsEntity">
+		SELECT
+				t.goods_id,
+				SUM(t.num) AS soldcount
+			FROM
+				(
+					SELECT
+						og.num,
+						og.goods_id,
+						o.order_status
+					FROM
+						ns_order_goods og
+					LEFT JOIN ns_order o ON og.order_id = o.order_id
+				) t
+			WHERE
+				t.order_status IN (2, 3, 4)
+		<if test="goodsId !=null and goodsId !=''">
+			AND t.goods_id = #{goodsId} 
+		</if>
+			GROUP BY
+				t.goods_id
+	</select>
+	
+	<select id="queryRoomList" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.goods.entity.GoodsEntity">
+		<![CDATA[
+		SELECT
+			g.*, l.soldcount,
+			b.avgPoint,
+			b.commentCount,
+			CASE WHEN s.sCount IS NULL THEN
+				g.stock
+			ELSE
+				g.stock - s.sCount
+			END AS leftStock,
+			g.group_id_array,
+			g.price
+		FROM
+			ns_goods g
+		LEFT JOIN (
+			SELECT
+				t.goods_id,
+				SUM(t.num) AS sCount,
+				t.order_status,
+				t.livein_date,
+				t.leaveout_date
+			FROM
+				(
+					SELECT
+						og.num,
+						og.goods_id,
+						o.order_status,
+						og.livein_date,
+						og.leaveout_date
+					FROM
+						ns_order_goods og
+					LEFT JOIN ns_order o ON og.order_id = o.order_id
+					WHERE
+						DATEDIFF(og.livein_date, NOW()) = 0
+					OR (
+						DATE_FORMAT(og.livein_date, '%Y-%m-%d') < DATE_FORMAT(NOW(), '%Y-%m-%d')
+						AND DATE_FORMAT(
+							og.leaveout_date,'%Y-%m-%d') > DATE_FORMAT(NOW(), '%Y-%m-%d')
+					)
+				) t
+			WHERE
+				t.order_status IN (0, 2, 3, 4)
+			GROUP BY
+				t.goods_id
+		) s ON g.goods_id = s.goods_id
+		LEFT JOIN (
+			SELECT
+				gc.goods_id,
+				AVG(gc.point) AS avgPoint,
+				COUNT(gc.goods_id) AS commentCount
+			FROM
+				ns_goods_comment gc
+			WHERE
+				gc.review_status = 2
+			GROUP BY
+				gc.goods_id
+		) b ON g.goods_id = b.goods_id
+		LEFT JOIN (
+			SELECT
+				t.goods_id,
+				SUM(t.num) AS soldCount,
+				t.order_status
+			FROM
+				(
+					SELECT
+						og.num,
+						og.goods_id,
+						o.order_status,
+						og.livein_date,
+						og.leaveout_date
+					FROM
+						ns_order_goods og
+					LEFT JOIN ns_order o ON og.order_id = o.order_id
+				) t
+			WHERE
+				t.order_status IN (2, 3, 4)
+			GROUP BY
+				t.goods_id
+		) l ON g.goods_id = l.goods_id
+		WHERE
+			1 = 1
+		AND g.state = 1
+		AND g.goods_attribute_id = 1
+		]]>
+		<if test="goodsId !=null and goodsId !=''">
+			AND g.goods_id = #{goodsId} 
+		</if>
+		<if test="groupIdArray !=null and groupIdArray !=''">
+			AND g.group_id_array = #{groupIdArray} 
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 1">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    g.sort is null,
+			</if>
+			g.sort 
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 2">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    l.soldcount is null,
+			</if>
+			l.soldcount 
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 3">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    b.avgPoint is null,
+			</if>
+			b.avgPoint
+		</if>
+		<if test="orderColum !=null and orderColum !='' and orderColum == 4">
+			ORDER BY 
+			<if test="orderSection != null and orderSection != '' and orderSection == 0">
+			    g.price is null,
+			</if>
+			g.price
+		</if>
+		<if test="orderSection != null and orderSection != '' and orderSection == 0">
+		    ASC,
+		</if>
+		<if test="orderSection != null and orderSection != '' and orderSection == 1">
+		    DESC,
+		</if>
+		g.create_time
+	</select>
+	
+	<select id="queryRoomUse" parameterType="java.util.Map"
+		resultType="com.jiudian.modules.goods.entity.GoodsEntity">
+		<![CDATA[
+		SELECT
+			SUM(t.num) AS soldcount
+		FROM
+			(
+				SELECT
+					og.num,
+					og.goods_id,
+					o.order_status,
+					o.order_type,
+					og.livein_date,
+					og.leaveout_date
+				FROM
+					ns_order_goods og
+				LEFT JOIN ns_order o ON og.order_id = o.order_id
+				WHERE
+					(
+						DATE_FORMAT(#{liveIn}, '%Y-%m-%d') > DATE_FORMAT(og.livein_date, '%Y-%m-%d')
+						AND DATE_FORMAT(#{liveIn}, '%Y-%m-%d') < DATE_FORMAT(og.leaveout_date,'%Y-%m-%d')
+					)
+				OR (
+					(
+						DATEDIFF(og.livein_date, #{liveIn}) = 0
+						OR DATE_FORMAT(#{liveIn}, '%Y-%m-%d') < DATE_FORMAT(og.livein_date, '%Y-%m-%d')
+					)
+					AND DATE_FORMAT(#{leaveOut}, '%Y-%m-%d') > DATE_FORMAT(og.livein_date, '%Y-%m-%d')
+				)
+			) t
+		]]>
+		WHERE
+			t.order_status IN (0, 2, 3, 4)
+			AND t.order_type = 1
+		<if test="goodsId !=null and goodsId !=''">
+			AND t.goods_id = #{goodsId} 
+		</if>
+		GROUP BY
+			t.goods_id
+		
+	</select>
+    
+
+
+</mapper>

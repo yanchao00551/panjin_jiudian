@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.goods.dao.GoodsSkuDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.goods.entity.GoodsSkuEntity" id="goodsSkuMap">
+        <result property="skuId" column="sku_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="attrValueItems" column="attr_value_items"/>
+        <result property="attrValueItemsFormat" column="attr_value_items_format"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="price" column="price"/>
+        <result property="promotePrice" column="promote_price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="stock" column="stock"/>
+        <result property="picture" column="picture"/>
+        <result property="code" column="code"/>
+        <result property="qrcode" column="QRcode"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+
+</mapper>

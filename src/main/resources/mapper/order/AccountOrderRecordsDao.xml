@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiudian.modules.order.dao.AccountOrderRecordsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jiudian.modules.order.entity.AccountOrderRecordsEntity" id="accountOrderRecordsMap">
+        <result property="id" column="id"/>
+        <result property="serialNo" column="serial_no"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="money" column="money"/>
+        <result property="accountType" column="account_type"/>
+        <result property="typeAlisId" column="type_alis_id"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>
